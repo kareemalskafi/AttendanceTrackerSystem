@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trainer Profile</title>
+    <link rel="stylesheet" href="trainer-profile.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Student Trainer Information</h1>
+    </header>
+
+    <div class="container">
+      <img id="trainerImage" alt="Student Trainer Image" width="100%" />
+
+      <form id="editForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="trainerFirstName" name="firstName" readonly />
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="trainerLastName" name="lastName" readonly />
+
+        <label for="email">Email:</label>
+        <input type="email" id="trainerEmail" name="email" readonly />
+
+        <div id="passwordContainer">
+          <label for="password">Password:</label>
+          <input type="password" id="trainerPassword" name="password" />
+        </div>
+
+        <button type="button" onclick="EnableEditing()" id="editButton">
+          Edit Information
+        </button>
+        <button type="button" onclick="SaveChanges()" id="saveButton">
+          Save Changes
+        </button>
+      </form>
+    </div>
+    <script src="trainer-profile.js"></script>
+  </body>
+</html>
