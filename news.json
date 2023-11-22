@@ -1,0 +1,24 @@
+[
+  {
+    "title": "News 1",
+    "contant": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8GPCtU3pAFHQ9XhTneCyKSJs1W37nmgcTZ_RXmUI02BF8pDTya-XtgT_PejWoyULte1k&usqp=CAU"
+  },
+  {
+    "title": "News 2",
+    "contant": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8GPCtU3pAFHQ9XhTneCyKSJs1W37nmgcTZ_RXmUI02BF8pDTya-XtgT_PejWoyULte1k&usqp=CAU"
+  },
+  {
+    "title": "News 3",
+    "contant": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8GPCtU3pAFHQ9XhTneCyKSJs1W37nmgcTZ_RXmUI02BF8pDTya-XtgT_PejWoyULte1k&usqp=CAU"
+  }, 
+  {
+    "title": "News 4",
+    "contant": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8GPCtU3pAFHQ9XhTneCyKSJs1W37nmgcTZ_RXmUI02BF8pDTya-XtgT_PejWoyULte1k&usqp=CAU"
+  }
+
+
+]

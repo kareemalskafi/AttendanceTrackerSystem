@@ -82,8 +82,10 @@
     <div id="myModalNews" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Latest News Header</h2>
-        <p>This is a simple modal window!</p>
+        <h2>Latest News</h2>
+        <div class="slider-container">
+          <div id="slider" class="slider"></div>
+        </div>
       </div>
     </div>
 
@@ -123,11 +125,15 @@
 
     <section id="note" class="two">
       <div class="container small">
+
         <header>
           <h2>Note</h2>
         </header>
 
-        yousef
+       
+      
+       
+
 
       </div>
     </section>
@@ -227,6 +233,54 @@
   }
 </script>
 
+<script>
+
+  // News------------------------------------------------------------------------------
+  // Fetch data from news.json
+  fetch('news.json')
+    .then(response => response.json())
+    .then(data => {
+      const slider = document.getElementById('slider');
+  
+      // Iterate through each news in the JSON data
+      data.forEach(news => {
+        // Create a slide element
+        const slide = document.createElement('div');
+        slide.classList.add('slide');
+  
+        // Create image element
+        const imageElement = document.createElement('img');
+        imageElement.src = news.image;
+        imageElement.alt = news.contant; // Set alt text for accessibility
+        imageElement.style.margin = '30px';
+        // Create elements for title, url, and contant
+        
+        const titleElement = document.createElement('h4');
+        titleElement.textContent = news.title;
+        titleElement.style.margin = '30px';
+        
+        const contantElement = document.createElement('h5');
+        contantElement.textContent = news.contant;
+        contantElement.style.margin = '30px';
+  
+  
+  
+        // Append elements to the slide
+        slide.appendChild(imageElement);
+        slide.appendChild(titleElement);
+        slide.appendChild(contantElement);
+  
+        // Append the slide to the slider container
+        slider.appendChild(slide);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+  
+  
+  
+  </script>
 
 <script>
     // Haitham Script-----------------------------------------------------------------------------------------------
