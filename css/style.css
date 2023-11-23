@@ -1827,6 +1827,59 @@ table.default tbody {
   text-decoration: none;
   cursor: pointer;
 }
+/*
+abd
+*/
+/* styles.css */
+
+/* Apply some basic styling to the to-do list section */
+#note {
+  background-color: #f4f4f4;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+/* Style the header */
+#note h2 {
+  color: #333;
+}
+
+/* Style the input and button */
+#todo-item {
+  padding: 8px;
+  margin-right: 8px;
+}
+
+#add-item {
+  padding: 8px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* Style the to-do list items */
+#todo-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#todo-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+/* Style the checkbox */
+#todo-list input[type="checkbox"] {
+  margin:auto;
+}
+
+/* Style the list item text */
+#todo-list li span {
+  flex:2;
+}
+
 
 /*********************************************************************************/
 /*                 Haitham CSS Style                                             */
