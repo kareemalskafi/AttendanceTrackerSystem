@@ -26,7 +26,7 @@
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8GPCtU3pAFHQ9XhTneCyKSJs1W37nmgcTZ_RXmUI02BF8pDTya-XtgT_PejWoyULte1k&usqp=CAU"
             alt=""></span>
         <h1 id="title">trainerFirstName</h1>
-        <span class="byline">trainerEmail</span>
+        <span class="byline"></span>
       </div>
       <nav id="nav">
         <ul>
@@ -48,7 +48,7 @@
 
     <div class="bottom" style="margin-bottom: 30px;">
       <ul class="icons">
-        <li><a href="login.html" class="icon icon-signout">Logout<span>Logout</span></a></li>
+        <li><a href="login.html" class="icon icon-signout" onclick="logOut()">Logout<span>Logout</span></a></li>
       </ul>
     </div>
 
@@ -158,7 +158,10 @@
         </header>
 
         <div class="container1">
-          <img id="trainerImage" alt="Student Trainer Image" width="100%" />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8GPCtU3pAFHQ9XhTneCyKSJs1W37nmgcTZ_RXmUI02BF8pDTya-XtgT_PejWoyULte1k&usqp=CAU"
+            id="trainerImage" alt="Student Trainer Image" width="50%" />
+
 
           <form id="editForm">
             <label for="firstName">First Name:</label>
@@ -178,11 +181,11 @@
 
 
 
-            <button type="button" class="button scrolly" style="display: table-column;" onclick="EnableEditing()"
+            <button type="button" class="button scrolly" style="display: table-column;" onclick="enableEditing()"
               id="editButton">
               Edit Information
             </button>
-            <button type="button" class="button scrolly" onclick="SaveChanges()" id="saveButton">
+            <button type="button" class="button scrolly" onclick="saveChanges()" id="saveButton">
               Save Changes
             </button>
           </form>
@@ -217,7 +220,7 @@
 
 
 
-
+<!-- modal Script News -->
 <script>
   // modal Script News ----------------------------------------------------------------------------------------------
 
@@ -243,7 +246,7 @@
     }
   }
 </script>
-
+<!-- Fetch data from news.json -->
 <script>
 
   // News------------------------------------------------------------------------------
@@ -274,8 +277,6 @@
         contantElement.textContent = news.contant;
         contantElement.style.margin = '30px';
 
-
-
         // Append elements to the slide
         slide.appendChild(imageElement);
         slide.appendChild(titleElement);
@@ -292,208 +293,120 @@
 
 
 </script>
-
+<!-- Haitham Script Trainer Form -->
 <script>
-  // Haitham Script-----------------------------------------------------------------------------------------------
 
-  let trainerData;
-  let id;
-  let trainerDataKey = "trainerData";
+  // Function to populate form fields with logged-in user data
+  function displayLoggedInUserData() {
+    var loggedInUser = existingUsers.find(function (user) {
+      return user.loginactive === true;
+    });
 
-  document.addEventListener("DOMContentLoaded", function () {
-    // Load mock data to local storage
-    LocalStorageMockData();
-
-    // Load data from local storage
-    ShowTrainerData();
-  });
-
-  function ShowTrainerData() {
-    // Get currently logged in trainer id
-    id = GetCurrentlyLoggedInId();
-    // Get trainer data
-    trainerData = LoadTrainerData(id);
-    console.log(trainerData.trainerImage);
-    // Set the data to the html elements
-    document.getElementById("trainerImage").src = trainerData.trainerImage;
-    document.getElementById("trainerFirstName").value =
-      trainerData.trainerFirstName;
-    document.getElementById("trainerLastName").value =
-      trainerData.trainerLastName;
-    document.getElementById("trainerEmail").value = trainerData.trainerEmail;
-  }
-
-  function EnableEditing() {
-    // Show the save button
-    document.getElementById("saveButton").style.display = "table-column";
-
-    // Hide the edit button
-    document.getElementById("editButton").style.display = "none";
-
-    // Show the password input field
-    document.getElementById("passwordContainer").style.display = "block";
-
-    // Remove readonly from the input fields
-    document.getElementById("trainerFirstName").readOnly = false;
-    document.getElementById("trainerLastName").readOnly = false;
-    document.getElementById("trainerEmail").readOnly = false;
-  }
-
-  function SaveChanges() {
-    // Show the edit button
-    document.getElementById("editButton").style.display = "table-column";
-
-    // Hide the save button
-    document.getElementById("saveButton").style.display = "none";
-
-    // Hide the password input field
-    document.getElementById("passwordContainer").style.display = "none";
-
-    // Add readonly to the input fields
-    document.getElementById("trainerFirstName").readOnly = true;
-    document.getElementById("trainerLastName").readOnly = true;
-    document.getElementById("trainerEmail").readOnly = true;
-
-    // Save the changes to the local storage
-    SaveTrainerData();
-  }
-
-  function SaveTrainerData() {
-    let image = trainerData.image;
-
-    // Save the data to local storage
-    localStorage.setItem(
-      `trainerData-${id}`,
-      JSON.stringify({
-        trainerFirstName: document.getElementById("trainerFirstName").value,
-        trainerLastName: document.getElementById("trainerLastName").value,
-        trainerEmail: document.getElementById("trainerEmail").value,
-        trainerPassword: document.getElementById("trainerPassword").value,
-        image: image,
-        isLoggedIn: "true",
-      })
-    );
-
-    // Save the data to local storage
-    localStorage.setItem(
-      `trainerFirstName-${id}`,
-      document.getElementById("trainerFirstName").value
-    );
-    localStorage.setItem(
-      `trainerLastName-${id}`,
-      document.getElementById("trainerLastName").value
-    );
-    localStorage.setItem(
-      `trainerEmail-${id}`,
-      document.getElementById("trainerEmail").value
-    );
-    localStorage.setItem(
-      `trainerPassword-${id}`,
-      document.getElementById("trainerPassword").value
-    );
-  }
-
-  function LoadTrainerData(id) {
-    // Get the data from local storage
-    let getData = JSON.parse(localStorage.getItem(`trainerData-${id}`));
-
-    return getData;
-  }
-
-  function GetCurrentlyLoggedInId() {
-    // Loop through all the trainers' isLoggedIn key in local storage till we find the one that is true
-    for (let key in Object.keys(localStorage)) {
-      // Get the key name
-      let keyName = Object.keys(localStorage)[key].split("-")[0];
-      // Check if the key name is trainerData
-      if (keyName == trainerDataKey) {
-        let getData = JSON.parse(
-          localStorage.getItem(Object.keys(localStorage)[key])
-        );
-        if (getData.isLoggedIn == "true") {
-          // Get the trainer id
-          let id = Object.keys(localStorage)[key].split("-")[1];
-
-          // Return the trainer id
-          return id;
-        }
-      }
+    if (loggedInUser) {
+      document.getElementById('trainerFirstName').value = loggedInUser.firstName;
+      document.getElementById('trainerLastName').value = loggedInUser.lastName;
+      document.getElementById('trainerEmail').value = loggedInUser.email;
+      document.getElementById('trainerPassword').value = loggedInUser.password;
     }
   }
 
-  function LocalStorageMockData() {
-    localStorage.clear();
-
-    localStorage.setItem(
-      "trainerData-1",
-      JSON.stringify({
-        trainerFirstName: "Haitham",
-        trainerLastName: "Alrawi",
-        trainerEmail: "haitham.alrawi19@gmail.com",
-        trainerPassword: "123456789",
-        trainerImage:
-          "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-        isLoggedIn: "false",
-      })
-    );
-
-    localStorage.setItem(
-      "trainerData-2",
-      JSON.stringify({
-        trainerFirstName: "Haitham",
-        trainerLastName: "Alrawi",
-        trainerEmail: "haitham.alrawi19@gmail.com",
-        trainerPassword: "123456789",
-        trainerImage:
-          "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-        isLoggedIn: "false",
-      })
-    );
-
-    localStorage.setItem(
-      "trainerData-3",
-      JSON.stringify({
-        trainerFirstName: "Haitham",
-        trainerLastName: "Alrawi",
-        trainerEmail: "haitham.alrawi19@gmail.com",
-        trainerPassword: "123456789",
-        trainerImage:
-          "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-        isLoggedIn: "true",
-      })
-    );
-
-    localStorage.setItem(
-      "trainerData-4",
-      JSON.stringify({
-        trainerFirstName: "Haitham",
-        trainerLastName: "Alrawi",
-        trainerEmail: "haitham.alrawi19@gmail.com",
-        trainerPassword: "123456789",
-        trainerImage:
-          "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-        isLoggedIn: "false",
-      })
-    );
-
-    localStorage.setItem(
-      "trainerData-5",
-      JSON.stringify({
-        trainerFirstName: "Haitham",
-        trainerLastName: "Alrawi",
-        trainerEmail: "haitham.alrawi19@gmail.com",
-        trainerPassword: "123456789",
-        trainerImage:
-          "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-        isLoggedIn: "false",
-      })
-    );
+  // Function to enable editing of form fields
+  function enableEditing() {
+    // Show the save button
+    document.getElementById("saveButton").style.display = "table-column";
+    // Hide the edit button
+    document.getElementById("editButton").style.display = "none";
+    // Show the password input field
+    document.getElementById("passwordContainer").style.display = "block";
+    // Remove readonly from the input fields
+    document.getElementById('trainerFirstName').readOnly = false;
+    document.getElementById('trainerLastName').readOnly = false;
+    document.getElementById('trainerEmail').readOnly = false;
+    document.getElementById('trainerPassword').readOnly = false;
   }
+
+  // Function to save changes to localStorage
+  function saveChanges() {
+    // Show the edit button
+    document.getElementById("editButton").style.display = "table-column";
+    // Hide the save button
+    document.getElementById("saveButton").style.display = "none";
+    // Hide the password input field
+    document.getElementById("passwordContainer").style.display = "none";
+    var updatedUser = {
+      firstName: document.getElementById('trainerFirstName').value,
+      lastName: document.getElementById('trainerLastName').value,
+      email: document.getElementById('trainerEmail').value,
+      password: document.getElementById('trainerPassword').value,
+      loginactive: true // Set to true assuming the user is currently logged in
+    };
+    // Find the index of the logged-in user in existingUsers array
+    var loggedInUserIndex = existingUsers.findIndex(function (user) {
+      return user.loginactive === true;
+    });
+
+    if (loggedInUserIndex !== -1) {
+      // Update the user's data in existingUsers array
+      existingUsers[loggedInUserIndex] = updatedUser;
+      // Save the updated user data back to localStorage
+      localStorage.setItem('userArray', JSON.stringify(existingUsers));
+      // Optionally, notify the user that changes have been saved
+      alert('Changes saved successfully!');
+    } else {
+      alert('User not found or not logged in.');
+    }
+  }
+  // Retrieve userArray from localStorage or initialize an empty array
+  var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
+  // Display the data of the logged-in user in the form
+  displayLoggedInUserData();
+
 
 
 </script>
+<!-- Trainer Name Logout -->
+<script>
+  // Retrieve userArray from localStorage  NAME--------------------------------------------------------------------
+  var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
+  function displayUserArray() {
+    var titleElement = document.getElementById('title');
+    titleElement.innerHTML = '';
+    var loggedInUser = existingUsers.find(function (user) {
+      return user.loginactive === true;
+    });
+    if (loggedInUser) {
+      var h1 = document.createElement('h1');
+      h1.textContent = loggedInUser.firstName;
+      titleElement.appendChild(h1);
+    } else {
+      var noUserMsg = document.createElement('p');
+      noUserMsg.textContent = 'No user is currently logged in.';
+      titleElement.appendChild(noUserMsg);
+    }
+  }
+  displayUserArray();
 
 
+  function logOut() {
+    var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
+    var loggedInUserIndex = existingUsers.findIndex(function (user) {
+      return user.loginactive === true;
+    });
+
+    if (loggedInUserIndex !== -1) {
+      existingUsers[loggedInUserIndex].loginactive = false;
+      localStorage.setItem('userArray', JSON.stringify(existingUsers));
+    }
+
+    window.location.href = 'login.html'; // Redirect to login.html after logout
+  }
+</script>
+
+<script></script>
+
+<script></script>
+
+<script></script>
 
 
 </html>

@@ -173,6 +173,8 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" required>
 
+                <input type="checkbox"  id="loginactive" value="true" style="display: none;">
+
             </div>
 
         </div>
@@ -185,20 +187,20 @@
 </body>
 
 
-
-
 <script>
     const registerUser = () => {
         var firstName = document.getElementById('firstName').value;
         var lastName = document.getElementById('lastName').value;
         var email = document.getElementById('email').value;
         var password = document.getElementById('password').value;
+        var loginactive = false;
 
         var user = {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            password: password
+            password: password,
+            loginactive:loginactive
         };
 
         // Retrieve existing users from local storage

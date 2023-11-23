@@ -163,13 +163,15 @@
         <label for="loginPassword">Password</label>
         <input type="password" placeholder="Password" id="loginPassword" required>
 
+        <input type="checkbox"  id="loginactive" value="true" style="display: none;">
+
         <button type="button" onclick="loginUser()">Log In</button>
         <label><a href="reigster.html" style="text-decoration-line: none;"> You dont have account?  Register</a></label>
 
     </form>
 
 
-  <script>
+  <!-- <script>
     
     const loginUser = () => {
 
@@ -192,8 +194,36 @@
         // No redirection on unsuccessful login
     }
 }
-  </script>
+  </script> -->
 
+<script>
+    const loginUser = () => {
+        var loginEmail = document.getElementById('loginEmail').value;
+        var loginPassword = document.getElementById('loginPassword').value;
+
+        // Retrieve existing users from local storage
+        var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
+
+        // Find the user who is logging in
+        var userLoggingIn = existingUsers.find(user => {
+            return user.email === loginEmail && user.password === loginPassword;
+        });
+
+        if (userLoggingIn) {
+            // Set loginactive to true for the user who logged in
+            userLoggingIn.loginactive = true;
+
+            // Update localStorage with the modified user data
+            localStorage.setItem('userArray', JSON.stringify(existingUsers));
+
+            alert('Login successful!');
+            window.location.href = 'index.html'; // Redirect to index.html on successful login
+        } else {
+            alert('Invalid email or password. Please try again.');
+            // No redirection on unsuccessful login
+        }
+    }
+</script>
 
 
 
