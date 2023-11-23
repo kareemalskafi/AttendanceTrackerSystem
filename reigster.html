@@ -152,7 +152,7 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    
+
     <form id="registrationForm">
         <h3>Register</h3>
         <div class="col" style="display: flex;
@@ -179,6 +179,8 @@
 
 
         <button type="button" onclick="registerUser()">Register</button>
+        <label><a href="login.html" style="text-decoration-line: none;"> Do you have account?  Login</a></label>
+
     </form>
 </body>
 
@@ -215,9 +217,14 @@
             localStorage.setItem('userArray', JSON.stringify(existingUsers));
 
             alert('Registration successful!');
+
+            window.location.href = 'login.html';
+
+
         } else {
             alert('Email is already registered. Please use a different email.');
         }
+
     }
 
 
