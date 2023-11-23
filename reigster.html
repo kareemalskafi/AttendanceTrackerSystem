@@ -23,7 +23,7 @@
         }
 
         .background {
-            width: 430px;
+            width: 830px;
             height: 520px;
             position: absolute;
             transform: translate(-50%, -50%);
@@ -55,7 +55,7 @@
 
         form {
             height: 520px;
-            width: 400px;
+            width: 600px;
             background-color: rgba(255, 255, 255, 0.13);
             position: absolute;
             transform: translate(-50%, -50%);
@@ -152,17 +152,89 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form>
-        <h3>Login Here</h3>
 
-        <label for="username">Username</label>
-        <input type="text" placeholder="Email or Phone" id="username">
+    <form id="registrationForm">
+        <h3>Register</h3>
+        <div class="col" style="display: flex;
+        justify-content: space-evenly;">
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password">
+            <div class="row" style="display: table;  width: 45%;">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" required>
 
-        <button type="submit">Log In</button>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="row" style="display: table;  width: 45%;">
+
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+
+            </div>
+
+        </div>
+
+
+        <button type="button" onclick="registerUser()">Register</button>
+        <label><a href="login.html" style="text-decoration-line: none;"> Do you have account?  Login</a></label>
+
     </form>
 </body>
+
+
+
+
+<script>
+    const registerUser = () => {
+        var firstName = document.getElementById('firstName').value;
+        var lastName = document.getElementById('lastName').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        var user = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        };
+
+        // Retrieve existing users from local storage
+        var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
+
+        // Check if the email is already registered
+        var isEmailTaken = existingUsers.some(user => {
+            return user.email === email;
+        });
+
+        if (!isEmailTaken) {
+            // Add new user to the array
+            existingUsers.push(user);
+
+            // Save the updated array back to local storage
+            localStorage.setItem('userArray', JSON.stringify(existingUsers));
+
+            alert('Registration successful!');
+
+            window.location.href = 'login.html';
+
+
+        } else {
+            alert('Email is already registered. Please use a different email.');
+        }
+
+    }
+
+
+</script>
+
+
+
+
+
+
+
 
 </html>

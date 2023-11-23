@@ -154,17 +154,53 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form>
+    <form id="loginForm">
         <h3>Login Here</h3>
 
-        <label for="username">Username</label>
-        <input type="text" placeholder="Email or Phone" id="username">
+        <label for="loginEmail">Username</label>
+        <input type="email" placeholder="Email or Phone" id="loginEmail" required>
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password">
+        <label for="loginPassword">Password</label>
+        <input type="password" placeholder="Password" id="loginPassword" required>
 
-        <button type="submit">Log In</button>
+        <button type="button" onclick="loginUser()">Log In</button>
+        <label><a href="reigster.html" style="text-decoration-line: none;"> You dont have account?  Register</a></label>
+
     </form>
+
+
+  <script>
+    
+    const loginUser = () => {
+
+    var loginEmail = document.getElementById('loginEmail').value;
+    var loginPassword = document.getElementById('loginPassword').value;
+
+    // Retrieve existing users from local storage
+    var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
+
+    // Check if the provided email and password match any stored user
+    var isLoginSuccessful = existingUsers.some(user => {
+        return user.email === loginEmail && user.password === loginPassword;
+    });
+
+    if (isLoginSuccessful) {
+        alert('Login successful!');
+        window.location.href = 'index.html'; // Redirect to index.html on successful login
+    } else {
+        alert('Invalid email or password. Please try again.');
+        // No redirection on unsuccessful login
+    }
+}
+  </script>
+
+
+
+
+
+
+
+
 </body>
 
 </html>
