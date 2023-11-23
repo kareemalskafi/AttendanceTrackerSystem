@@ -3,91 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: white;
-        color: #fff;
-      }
-
-      .table-container {
-        width: 80%;
-        overflow: auto;
-      }
-
-      .student-table {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        border-radius: 8px;
-        background-color: #333;
-      }
-
-      .student-table-header,
-      .student-table-row {
-        display: flex;
-        justify-content: space-between;
-        background-color: #8ebebc;
-        padding: 12px;
-        font-weight: bold;
-        border-bottom: 1px solid #111;
-        text-transform: uppercase;
-        justify-content: center;
-        justify-items: center;
-        align-items: center;
-      }
-
-      .student-table-row {
-        border-bottom: 1px solid #444;
-        transition: background-color 0.3s;
-      }
-
-      .student-table-row:hover {
-        background-color: #c4d8d8;
-      }
-
-      .student-table-data {
-        flex: 1;
-        text-align: left;
-        padding: 12px;
-        word-break: break-all;
-      }
-
-      .student-table-data:nth-child(odd) {
-        background-color: #444;
-      }
-    </style>
     <title>Student Information</title>
+    <link rel="stylesheet" href="admin-access.css" />
   </head>
   <body>
-    <div class="table-container">
-      <div class="student-table">
-        <div class="student-table-header">
-          <div class="student-table-data">Student Name</div>
-          <div class="student-table-data">Student ID</div>
-          <div class="student-table-data">Absences</div>
-          <div class="student-table-data">Tasks Solved</div>
-          <div class="student-table-data">Total Tasks</div>
-          <div class="student-table-data">Trainer Name</div>
-        </div>
-        <div class="student-table-row">
-          <div class="student-table-data">John Doe</div>
-          <div class="student-table-data">12345</div>
-          <div class="student-table-data">2</div>
-          <div class="student-table-data">25</div>
-          <div class="student-table-data">30</div>
-          <div class="student-table-data">Mr. Smith</div>
-        </div>
-      </div>
+    <div id="title-row">
+      <div>First</div>
+      <div>Last</div>
+      <div>ID</div>
+      <div>Absences</div>
+      <div>Tasks Solved</div>
+      <div>Total Tasks</div>
     </div>
+
+    <div id="rows-container"></div>
+
+    <script src="admin-access.js"></script>
   </body>
 </html>

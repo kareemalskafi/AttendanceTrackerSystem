@@ -3,9 +3,6 @@ let id;
 let trainerDataKey = "trainerData";
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Load mock data to local storage
-  LocalStorageMockData();
-
   // Load data from local storage
   ShowTrainerData();
 });
@@ -14,15 +11,14 @@ function ShowTrainerData() {
   // Get currently logged in trainer id
   id = GetCurrentlyLoggedInId();
   // Get trainer data
-  trainerData = LoadTrainerData(id);
-  console.log(trainerData.trainerImage);
+  trainerData = LoadTrainerData();
+  console.log(trainerData);
   // Set the data to the html elements
   document.getElementById("trainerImage").src = trainerData.trainerImage;
-  document.getElementById("trainerFirstName").value =
-    trainerData.trainerFirstName;
-  document.getElementById("trainerLastName").value =
-    trainerData.trainerLastName;
-  document.getElementById("trainerEmail").value = trainerData.trainerEmail;
+  document.getElementById("trainerFirstName").value = trainerData.firstName;
+  document.getElementById("trainerLastName").value = trainerData.lastName;
+  document.getElementById("trainerEmail").value = trainerData.email;
+  document.getElementById("trainerPassword").value = trainerData.password;
 }
 
 function EnableEditing() {
@@ -61,45 +57,25 @@ function SaveChanges() {
 }
 
 function SaveTrainerData() {
-  let image = trainerData.image;
+  // Get all the users from local storage
+  var allUsers = JSON.parse(localStorage.getItem("userArray")) || [];
+
+  // Get the information from the input fields
+  allUsers[0].firstName = document.getElementById("trainerFirstName").value;
+  allUsers[0].lastName = document.getElementById("trainerLastName").value;
+  allUsers[0].email = document.getElementById("trainerEmail").value;
+  allUsers[0].password = document.getElementById("trainerPassword").value;
 
   // Save the data to local storage
-  localStorage.setItem(
-    `trainerData-${id}`,
-    JSON.stringify({
-      trainerFirstName: document.getElementById("trainerFirstName").value,
-      trainerLastName: document.getElementById("trainerLastName").value,
-      trainerEmail: document.getElementById("trainerEmail").value,
-      trainerPassword: document.getElementById("trainerPassword").value,
-      image: image,
-      isLoggedIn: "true",
-    })
-  );
-
-  // Save the data to local storage
-  localStorage.setItem(
-    `trainerFirstName-${id}`,
-    document.getElementById("trainerFirstName").value
-  );
-  localStorage.setItem(
-    `trainerLastName-${id}`,
-    document.getElementById("trainerLastName").value
-  );
-  localStorage.setItem(
-    `trainerEmail-${id}`,
-    document.getElementById("trainerEmail").value
-  );
-  localStorage.setItem(
-    `trainerPassword-${id}`,
-    document.getElementById("trainerPassword").value
-  );
+  localStorage.setItem("userArray", JSON.stringify(allUsers));
 }
 
-function LoadTrainerData(id) {
+function LoadTrainerData() {
   // Get the data from local storage
-  let getData = JSON.parse(localStorage.getItem(`trainerData-${id}`));
+  let getTrainersData = JSON.parse(localStorage.getItem("userArray")) || [];
+  let getTrainerData = getTrainersData[0];
 
-  return getData;
+  return getTrainerData;
 }
 
 function GetCurrentlyLoggedInId() {
@@ -121,73 +97,4 @@ function GetCurrentlyLoggedInId() {
       }
     }
   }
-}
-
-function LocalStorageMockData() {
-  localStorage.clear();
-
-  localStorage.setItem(
-    "trainerData-1",
-    JSON.stringify({
-      trainerFirstName: "Haitham",
-      trainerLastName: "Alrawi",
-      trainerEmail: "haitham.alrawi19@gmail.com",
-      trainerPassword: "123456789",
-      trainerImage:
-        "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-      isLoggedIn: "false",
-    })
-  );
-
-  localStorage.setItem(
-    "trainerData-2",
-    JSON.stringify({
-      trainerFirstName: "Haitham",
-      trainerLastName: "Alrawi",
-      trainerEmail: "haitham.alrawi19@gmail.com",
-      trainerPassword: "123456789",
-      trainerImage:
-        "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-      isLoggedIn: "false",
-    })
-  );
-
-  localStorage.setItem(
-    "trainerData-3",
-    JSON.stringify({
-      trainerFirstName: "Haitham",
-      trainerLastName: "Alrawi",
-      trainerEmail: "haitham.alrawi19@gmail.com",
-      trainerPassword: "123456789",
-      trainerImage:
-        "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-      isLoggedIn: "true",
-    })
-  );
-
-  localStorage.setItem(
-    "trainerData-4",
-    JSON.stringify({
-      trainerFirstName: "Haitham",
-      trainerLastName: "Alrawi",
-      trainerEmail: "haitham.alrawi19@gmail.com",
-      trainerPassword: "123456789",
-      trainerImage:
-        "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-      isLoggedIn: "false",
-    })
-  );
-
-  localStorage.setItem(
-    "trainerData-5",
-    JSON.stringify({
-      trainerFirstName: "Haitham",
-      trainerLastName: "Alrawi",
-      trainerEmail: "haitham.alrawi19@gmail.com",
-      trainerPassword: "123456789",
-      trainerImage:
-        "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-      isLoggedIn: "false",
-    })
-  );
 }
