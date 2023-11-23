@@ -268,20 +268,32 @@ Please write a feedback</textarea
         var studentID = document.getElementById("studentID").value;
         var taskValue = document.getElementById("s_task").value;
         var absent = document.getElementById("absent").value;
+
+
+
+
+
+        
         var studentTasks = {};
 
+
+// Check if the student ID is already in the object
+if (studentTasks[studentID]) {
+  // Update the tasks array for the existing student
+  studentTasks[studentID] = (totalTask + parseInt(taskValue));
+} else {
+  // Create a new tasks array for the student
+  studentTasks[studentID] = totalTask + parseInt(taskValue);
+  newStudent = true;
+}
+
+
+
+
+
+
         // Check if the student ID is already in the object
-        for (let task in studentTasks) {
-          if (task.studentID === studentID) {
-            // Update the tasks array for the existing student
-            task.tasks.push(totalTask + parseInt(taskValue));
-            return;
-          } else {
-            // Create a new tasks array for the student
-            studentTasks[studentID] = [totalTask + parseInt(taskValue)];
-            return;
-          }
-        }
+   
         // if (studentTasks) {
         //   // Update the tasks array for the existing student
         //   studentTasks[studentID].push(totalTask + parseInt(taskValue));
