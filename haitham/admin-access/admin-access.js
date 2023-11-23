@@ -13,46 +13,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function ShowStudentData() {
   // get student table
-  let studentTable = document.getElementById("student-table-row");
+  let nextRow = document.getElementById("rows-container");
+  let prevId;
 
   // Load student data from local storage
   studentData = LoadStudentData();
 
   // Loop through all the students and add them to table
-  for (let student in studentData) {
-    studentTable.innerHTML += `<div class="student-table-data">${student.firstName} ${student.lastName}</div>}`;
-    studentTable.innerHTML += `<div class="student-table-data">${student.id}</div>}`;
-    studentTable.innerHTML += `<div class="student-table-data">${student.absences}</div>}`;
-    studentTable.innerHTML += `<div class="student-table-data">${student.tasksSolved}</div>}`;
-    studentTable.innerHTML += `<div class="student-table-data">${student.totalTasks}</div>}`;
-    studentTable.innerHTML += `<div class="student-table-data">${student.trainerFirstName} ${student.trainerLastName}</div>}`;
+  for (let student of studentData) {
+    nextRow.innerHTML += `
+    <div class="row" id="${student.id}">
+  <div>${student.firstName}</div>
+  <div>${student.lastName}</div>
+  <div>${student.id}</div>
+  <div>${student.absences}</div>
+  <div>${student.totalTasks}</div>
+  <div>${student.id}</div>
+  </div>
+    `;
   }
 }
 
 function LoadStudentData() {
-  studentData = JSON.parse(localStorage.getItem(studentDataKey));
+  // Get the data from local storage
+  let getStudentsData = JSON.parse(localStorage.getItem("studentArray")) || [];
 
-  let trainerId = GetTrainerFromId(studentLocalStorage.trainerId);
+  trainerData = JSON.parse(localStorage.getItem("userArray")) || [];
 
-  trainerData = GetTrainerFromId(trainerId);
-  studentData["trainerFirstName"] = trainerData.firstName;
-  studentData["trainerLastName"] = trainerData.lastName;
+  return getStudentsData;
 }
 
-function GetTrainerFromId() {
-  // Loop through all the trainers' ids in local storage till we find the one that is true
-  for (let key in Object.keys(localStorage)) {
-    // Get the key name
-    let keyName = Object.keys(localStorage)[key].split("-")[0];
-    // Check if the key name is trainerData
-    if (keyName == trainerDataKey) {
-      let getData = JSON.parse(
-        localStorage.getItem(Object.keys(localStorage)[key])
-      );
-      if (getData.id == id) {
-        // Return the trainer id
-        return getData;
-      }
-    }
-  }
+function LocalStorageMockData() {
+  let studentMockData = [
+    {
+      firstName: "haitham",
+      lastName: "Alrawi",
+      id: "123456",
+      absences: "0",
+      tasksSolved: "0",
+      totalTasks: "0",
+      trainerId: "1",
+    },
+  ];
+
+  localStorage.setItem("studentArray", JSON.stringify(studentMockData));
 }

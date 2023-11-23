@@ -1,69 +1,52 @@
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+#title-row {
   display: flex;
-  justify-content: center;
-  height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #1a2533; /* Slightly lighter teal color for title row */
+  border: 1px solid #1a2533;
+}
+
+#title-row div {
+  width: 150px; /* Set the maximum width for title and subtitle */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   margin: 0;
-  background-color: white;
   color: #fff;
 }
 
-#table-container {
-  width: 80%;
-  overflow: auto;
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #324759; /* Darker teal color for rows */
+  border: 1px solid #1a2533;
+  transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-#student-table {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.row:nth-child(odd) {
+  background-color: #2e4260; /* Slightly lighter teal color for odd rows */
+}
+
+.row:nth-child(even) {
+  background-color: #2a3d56; /* Slightly lighter teal color for even rows */
+}
+
+.row:hover {
+  background-color: #45678f; /* Lighter blue on hover */
+}
+
+.row div {
+  width: 150px; /* Set a constant width for the <p> elements */
   overflow: hidden;
-  border-radius: 8px;
-  background-color: #333;
-}
-
-#student-table-row {
-  display: flex;
-  justify-content: space-between;
-  background-color: #377d7b;
-  padding: 12px;
-  font-weight: bold;
-  border-bottom: 1px solid #111;
-  text-transform: uppercase;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-}
-
-#student-table-header {
-  display: flex;
-  justify-content: space-between;
-  background-color: #004342;
-  padding: 12px;
-  font-weight: bold;
-  border-bottom: 1px solid #111;
-  text-transform: uppercase;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-}
-
-#student-table-row {
-  border-bottom: 1px solid #444;
-  transition: background-color 0.3s;
-}
-
-#student-table-row:hover {
-  background-color: #c4d8d8;
-  color: #004342;
-}
-
-.student-table-data {
-  flex: 1;
-  text-align: left;
-  padding: 12px;
-  word-break: break-all;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
 }

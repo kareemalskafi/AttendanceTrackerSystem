@@ -1,499 +1,554 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <title>Attendance Tracker System</title>
+    <meta charset="utf-8" />
+    <link
+      href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600"
+      rel="stylesheet"
+      type="text/css"
+    />
 
-<head>
-  <title>Attendance Tracker System</title>
-  <meta charset="utf-8">
-  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600" rel="stylesheet" type="text/css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-panels.min.js"></script>
+    <script src="js/init.js"></script>
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/skel.min.js"></script>
-  <script src="js/skel-panels.min.js"></script>
-  <script src="js/init.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="css/skel-noscript.css" />
+      <link rel="stylesheet" href="css/style.css" />
+      <link rel="stylesheet" href="css/style-wide.css" />
+    </noscript>
+  </head>
 
-  <noscript>
-    <link rel="stylesheet" href="css/skel-noscript.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style-wide.css">
-  </noscript>
+  <body>
+    <div id="header" class="skel-panels-fixed">
+      <div class="top">
+        <div id="logo">
+          <span class="image avatar48"
+            ><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8GPCtU3pAFHQ9XhTneCyKSJs1W37nmgcTZ_RXmUI02BF8pDTya-XtgT_PejWoyULte1k&usqp=CAU"
+              alt=""
+          /></span>
+          <h1 id="title">trainerFirstName</h1>
+          <span class="byline">trainerEmail</span>
+        </div>
+        <nav id="nav">
+          <ul>
+            <li>
+              <a href="#home" id="top-home" class="skel-panels-ignoreHref"
+                ><span class="icon icon-home">Home</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="#trainees"
+                id="trainees-link"
+                class="skel-panels-ignoreHref"
+                ><span class="icon icon-th">Trainees</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="#feedback"
+                id="feedback-link"
+                class="skel-panels-ignoreHref"
+                ><span class="icon icon-user">Feedback</span></a
+              >
+            </li>
+            <li>
+              <a href="#note" id="note-link" class="skel-panels-ignoreHref"
+                ><span class="icon icon-edit">Note</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="#profile"
+                id="profile-link"
+                class="skel-panels-ignoreHref"
+                ><span class="icon icon-envelope">Profile</span></a
+              >
+            </li>
 
-</head>
-
-<body>
-  <div id="header" class="skel-panels-fixed">
-    <div class="top">
-      <div id="logo"> <span class="image avatar48"><img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8GPCtU3pAFHQ9XhTneCyKSJs1W37nmgcTZ_RXmUI02BF8pDTya-XtgT_PejWoyULte1k&usqp=CAU"
-            alt=""></span>
-        <h1 id="title">trainerFirstName</h1>
-        <span class="byline">trainerEmail</span>
+            <li>
+              <a href="login.html" class="skel-panels-ignoreHref"
+                ><span class="icon icon-signout">Logout</span></a
+              >
+            </li>
+          </ul>
+        </nav>
       </div>
-      <nav id="nav">
-        <ul>
-          <li><a href="#home" id="top-home" class="skel-panels-ignoreHref"><span class="icon icon-home">Home</span></a>
-          </li>
-          <li><a href="#trainees" id="trainees-link" class="skel-panels-ignoreHref"><span
-                class="icon icon-th">Trainees</span></a></li>
-          <li><a href="#feedback" id="feedback-link" class="skel-panels-ignoreHref"><span
-                class="icon icon-user">Feedback</span></a></li>
-          <li><a href="#note" id="note-link" class="skel-panels-ignoreHref"><span class="icon icon-edit">Note</span></a>
-          </li>
-          <li><a href="#profile" id="profile-link" class="skel-panels-ignoreHref"><span
-                class="icon icon-envelope">Profile</span></a></li>
 
-          <li><a href="login.html" class="skel-panels-ignoreHref"><span class="icon icon-signout">Logout</span></a></li>
+      <div class="bottom" style="margin-bottom: 30px">
+        <ul class="icons">
+          <li>
+            <a href="login.html" class="icon icon-signout"
+              >Logout<span>Logout</span></a
+            >
+          </li>
         </ul>
-      </nav>
-    </div>
-
-    <div class="bottom" style="margin-bottom: 30px;">
-      <ul class="icons">
-        <li><a href="login.html" class="icon icon-signout">Logout<span>Logout</span></a></li>
-      </ul>
-    </div>
-
-    <br>
-
-    <div class="bottom">
-      <ul class="icons">
-        <li><a href="https://twitter.com/Yousef1Aldeeb" class="icon icon-twitter"
-            target="_blank"><span>Twitter</span></a></li>
-        <li><a href="https://www.facebook.com/yousef.aldeeb" class="icon icon-facebook"
-            target="_blank"><span>Facebook</span></a></li>
-        <li><a href="https://github.com/yousefweb" class="icon icon-github" target="_blank"><span>Github</span></a></li>
-        <li><a href="https://www.linkedin.com/in/yousef-al-deeb/" class="icon icon-linkedin"
-            target="_blank"><span>linkedin</span></a></li>
-        <li><a href="https://www.instagram.com/yousefaldeeb1/" class="icon icon-instagram"
-            target="_blank"><span>Instagram</span></a></li>
-      </ul>
-    </div>
-
-
-  </div>
-  <div id="main">
-
-
-    <section id="home" class="one">
-      <div class="container small">
-        <header
-          style="padding: 150px;    background: round; background-image: url(https://blog.cdn.cmarix.com/blog/wp-content/uploads/2022/05/Attendance-Management-System.png);">
-          <h2 class="alt">TrackEase: Streamlined Attendance Management System</h2>
-        </header>
-        <p>TrackEase is an efficient attendance tracker system designed to simplify attendance recording and management
-          for organizations. With user-friendly interfaces and robust features, it offers real-time monitoring,
-          automated reporting, and customizable options, making attendance tracking hassle-free for administrators and
-          employees alike.</p>
-        <footer>
-          <button id="openModalBtnNews" class="button scrolly">Latest News</button>
-        </footer>
       </div>
-    </section>
-    <!-- The Modal -->
-    <div id="myModalNews" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Latest News</h2>
-        <div class="slider-container">
-          <div id="slider" class="slider"></div>
+
+      <br />
+
+      <div class="bottom">
+        <ul class="icons">
+          <li>
+            <a
+              href="https://twitter.com/Yousef1Aldeeb"
+              class="icon icon-twitter"
+              target="_blank"
+              ><span>Twitter</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.facebook.com/yousef.aldeeb"
+              class="icon icon-facebook"
+              target="_blank"
+              ><span>Facebook</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/yousefweb"
+              class="icon icon-github"
+              target="_blank"
+              ><span>Github</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/yousef-al-deeb/"
+              class="icon icon-linkedin"
+              target="_blank"
+              ><span>linkedin</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/yousefaldeeb1/"
+              class="icon icon-instagram"
+              target="_blank"
+              ><span>Instagram</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="main">
+      <section id="home" class="one">
+        <div class="container small">
+          <header
+            style="
+              padding: 150px;
+              background: round;
+              background-image: url(https://blog.cdn.cmarix.com/blog/wp-content/uploads/2022/05/Attendance-Management-System.png);
+            "
+          >
+            <h2 class="alt">
+              TrackEase: Streamlined Attendance Management System
+            </h2>
+          </header>
+          <p>
+            TrackEase is an efficient attendance tracker system designed to
+            simplify attendance recording and management for organizations. With
+            user-friendly interfaces and robust features, it offers real-time
+            monitoring, automated reporting, and customizable options, making
+            attendance tracking hassle-free for administrators and employees
+            alike.
+          </p>
+          <footer>
+            <button id="openModalBtnNews" class="button scrolly">
+              Latest News
+            </button>
+          </footer>
+        </div>
+      </section>
+      <!-- The Modal -->
+      <div id="myModalNews" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Latest News</h2>
+          <div class="slider-container">
+            <div id="slider" class="slider"></div>
+          </div>
         </div>
       </div>
-    </div>
 
+      <section id="trainees" class="two">
+        <div class="container">
+          <header>
+            <h2>Trainees</h2>
+          </header>
+          <p>
+            The webpage provides a trainees management interface with options to
+            add students, tasks, and feedback. It includes forms for entering
+            student information, tasks, and feedback. The trainees' details,
+            such as ID, name, solved tasks, absence, and counters, are displayed
+            in a table. The interface allows updating counters, removing rows,
+            and updating total tasks for all students
+          </p>
+          <div class="row">yousef</div>
+        </div>
+      </section>
 
-
-
-
-    <section id="trainees" class="two">
-      <div class="container">
-        <header>
-          <h2>Trainees</h2>
-        </header>
-        <p>
-          The webpage provides a trainees management interface with options to add students, tasks, and feedback. It
-          includes forms for entering student information, tasks, and feedback. The trainees' details, such as ID, name,
-          solved tasks, absence, and counters, are displayed in a table. The interface allows updating counters,
-          removing rows, and updating total tasks for all students</p>
-        <div class="row">
+      <section id="feedback" class="three">
+        <div class="container small">
+          <header>
+            <h2>feedback</h2>
+          </header>
 
           yousef
-
         </div>
-      </div>
-    </section>
+      </section>
 
+      <section id="note" class="two">
+        <div class="container small">
+          <header>
+            <h2>Note</h2>
+          </header>
 
-
-
-    <section id="feedback" class="three">
-      <div class="container small">
-        <header>
-          <h2>feedback</h2>
-        </header>
-
-        yousef
-
-      </div>
-    </section>
-
-
-    <section id="note" class="two">
-      <div class="container small">
-
-        <header>
-          <h2>Note</h2>
-        </header>
-
-        yousef
-
-      </div>
-    </section>
-
-
-
-
-    <section id="profile" class="four">
-      <div class="container small">
-        <header>
-          <h2>Trainer Profile</h2>
-        </header>
-
-        <div class="container1">
-          <img id="trainerImage" alt="Student Trainer Image" width="100%" />
-
-          <form id="editForm">
-            <label for="firstName">First Name:</label>
-            <input type="text" id="trainerFirstName" name="firstName" readonly />
-
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="trainerLastName" name="lastName" readonly />
-
-            <label for="email">Email:</label>
-            <input type="email" id="trainerEmail" name="email" readonly />
-
-            <div id="passwordContainer">
-              <label for="password">Password:</label>
-              <input type="password" id="trainerPassword" name="password" />
-            </div>
-
-
-
-
-            <button type="button" class="button scrolly" style="display: table-column;" onclick="EnableEditing()"
-              id="editButton">
-              Edit Information
-            </button>
-            <button type="button" class="button scrolly" onclick="SaveChanges()" id="saveButton">
-              Save Changes
-            </button>
-          </form>
+          yousef
         </div>
+      </section>
 
+      <section id="profile" class="four">
+        <div class="container small">
+          <header>
+            <h2>Trainer Profile</h2>
+          </header>
 
+          <div class="container1">
+            <img id="trainerImage" alt="Student Trainer Image" width="100%" />
 
+            <form id="editForm">
+              <label for="firstName">First Name:</label>
+              <input
+                type="text"
+                id="trainerFirstName"
+                name="firstName"
+                readonly
+              />
 
-      </div>
-    </section>
+              <label for="lastName">Last Name:</label>
+              <input
+                type="text"
+                id="trainerLastName"
+                name="lastName"
+                readonly
+              />
 
+              <label for="email">Email:</label>
+              <input type="email" id="trainerEmail" name="email" readonly />
 
+              <div id="passwordContainer">
+                <label for="password">Password:</label>
+                <input type="password" id="trainerPassword" name="password" />
+              </div>
 
-
-  </div>
-
-
-
-
-
-
-
-  <div id="footer">
-    <div class="copyright">
-      <p>&copy; 2023 Attendance Tracker System.</p>
-      <ul class="menu">
-        <li>Design: <a href="https://github.com/AymanAlmahsery" target="_blank">Ayman Ali</a></li>
-      </ul>
+              <button
+                type="button"
+                class="button scrolly"
+                style="display: table-column"
+                onclick="EnableEditing()"
+                id="editButton"
+              >
+                Edit Information
+              </button>
+              <button
+                type="button"
+                class="button scrolly"
+                onclick="SaveChanges()"
+                id="saveButton"
+              >
+                Save Changes
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
     </div>
-  </div>
-</body>
 
+    <div id="footer">
+      <div class="copyright">
+        <p>&copy; 2023 Attendance Tracker System.</p>
+        <ul class="menu">
+          <li>
+            Design:
+            <a href="https://github.com/AymanAlmahsery" target="_blank"
+              >Ayman Ali</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
 
+  <script>
+    // modal Script News ----------------------------------------------------------------------------------------------
 
+    // Get the modal and the button that opens it
+    const modal = document.getElementById("myModalNews");
+    const btn = document.getElementById("openModalBtnNews");
+    const closeBtn = document.getElementsByClassName("close")[0];
 
-<script>
-  // modal Script News ----------------------------------------------------------------------------------------------
+    // Open the modal when the button is clicked
+    btn.onclick = function () {
+      modal.style.display = "block";
+    };
 
-  // Get the modal and the button that opens it
-  const modal = document.getElementById('myModalNews');
-  const btn = document.getElementById('openModalBtnNews');
-  const closeBtn = document.getElementsByClassName('close')[0];
+    // Close the modal when the close button is clicked
+    closeBtn.onclick = function () {
+      modal.style.display = "none";
+    };
 
-  // Open the modal when the button is clicked
-  btn.onclick = function () {
-    modal.style.display = 'block';
-  }
+    // Close the modal when clicking outside the modal content
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
 
-  // Close the modal when the close button is clicked
-  closeBtn.onclick = function () {
-    modal.style.display = 'none';
-  }
+  <script>
+    // News------------------------------------------------------------------------------
+    // Fetch data from news.json
+    fetch("news.json")
+      .then((response) => response.json())
+      .then((data) => {
+        const slider = document.getElementById("slider");
 
-  // Close the modal when clicking outside the modal content
-  window.onclick = function (event) {
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  }
-</script>
+        // Iterate through each news in the JSON data
+        data.forEach((news) => {
+          // Create a slide element
+          const slide = document.createElement("div");
+          slide.classList.add("slide");
 
-<script>
+          // Create image element
+          const imageElement = document.createElement("img");
+          imageElement.src = news.image;
+          imageElement.alt = news.contant; // Set alt text for accessibility
+          imageElement.style.margin = "30px";
+          // Create elements for title, url, and contant
 
-  // News------------------------------------------------------------------------------
-  // Fetch data from news.json
-  fetch('news.json')
-    .then(response => response.json())
-    .then(data => {
-      const slider = document.getElementById('slider');
+          const titleElement = document.createElement("h4");
+          titleElement.textContent = news.title;
+          titleElement.style.margin = "30px";
 
-      // Iterate through each news in the JSON data
-      data.forEach(news => {
-        // Create a slide element
-        const slide = document.createElement('div');
-        slide.classList.add('slide');
+          const contantElement = document.createElement("h5");
+          contantElement.textContent = news.contant;
+          contantElement.style.margin = "30px";
 
-        // Create image element
-        const imageElement = document.createElement('img');
-        imageElement.src = news.image;
-        imageElement.alt = news.contant; // Set alt text for accessibility
-        imageElement.style.margin = '30px';
-        // Create elements for title, url, and contant
+          // Append elements to the slide
+          slide.appendChild(imageElement);
+          slide.appendChild(titleElement);
+          slide.appendChild(contantElement);
 
-        const titleElement = document.createElement('h4');
-        titleElement.textContent = news.title;
-        titleElement.style.margin = '30px';
-
-        const contantElement = document.createElement('h5');
-        contantElement.textContent = news.contant;
-        contantElement.style.margin = '30px';
-
-
-
-        // Append elements to the slide
-        slide.appendChild(imageElement);
-        slide.appendChild(titleElement);
-        slide.appendChild(contantElement);
-
-        // Append the slide to the slider container
-        slider.appendChild(slide);
+          // Append the slide to the slider container
+          slider.appendChild(slide);
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
+  </script>
+
+  <script>
+    // Haitham Script-----------------------------------------------------------------------------------------------
+
+    let trainerData;
+    let id;
+    let trainerDataKey = "trainerData";
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Load mock data to local storage
+      LocalStorageMockData();
+
+      // Load data from local storage
+      ShowTrainerData();
     });
 
+    function ShowTrainerData() {
+      // Get currently logged in trainer id
+      id = GetCurrentlyLoggedInId();
+      // Get trainer data
+      trainerData = LoadTrainerData(id);
+      console.log(trainerData.trainerImage);
+      // Set the data to the html elements
+      document.getElementById("trainerImage").src = trainerData.trainerImage;
+      document.getElementById("trainerFirstName").value =
+        trainerData.trainerFirstName;
+      document.getElementById("trainerLastName").value =
+        trainerData.trainerLastName;
+      document.getElementById("trainerEmail").value = trainerData.trainerEmail;
+    }
 
+    function EnableEditing() {
+      // Show the save button
+      document.getElementById("saveButton").style.display = "table-column";
 
-</script>
+      // Hide the edit button
+      document.getElementById("editButton").style.display = "none";
 
-<script>
-  // Haitham Script-----------------------------------------------------------------------------------------------
+      // Show the password input field
+      document.getElementById("passwordContainer").style.display = "block";
 
-  let trainerData;
-  let id;
-  let trainerDataKey = "trainerData";
+      // Remove readonly from the input fields
+      document.getElementById("trainerFirstName").readOnly = false;
+      document.getElementById("trainerLastName").readOnly = false;
+      document.getElementById("trainerEmail").readOnly = false;
+    }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    // Load mock data to local storage
-    LocalStorageMockData();
+    function SaveChanges() {
+      // Show the edit button
+      document.getElementById("editButton").style.display = "table-column";
 
-    // Load data from local storage
-    ShowTrainerData();
-  });
+      // Hide the save button
+      document.getElementById("saveButton").style.display = "none";
 
-  function ShowTrainerData() {
-    // Get currently logged in trainer id
-    id = GetCurrentlyLoggedInId();
-    // Get trainer data
-    trainerData = LoadTrainerData(id);
-    console.log(trainerData.trainerImage);
-    // Set the data to the html elements
-    document.getElementById("trainerImage").src = trainerData.trainerImage;
-    document.getElementById("trainerFirstName").value =
-      trainerData.trainerFirstName;
-    document.getElementById("trainerLastName").value =
-      trainerData.trainerLastName;
-    document.getElementById("trainerEmail").value = trainerData.trainerEmail;
-  }
+      // Hide the password input field
+      document.getElementById("passwordContainer").style.display = "none";
 
-  function EnableEditing() {
-    // Show the save button
-    document.getElementById("saveButton").style.display = "table-column";
+      // Add readonly to the input fields
+      document.getElementById("trainerFirstName").readOnly = true;
+      document.getElementById("trainerLastName").readOnly = true;
+      document.getElementById("trainerEmail").readOnly = true;
 
-    // Hide the edit button
-    document.getElementById("editButton").style.display = "none";
+      // Save the changes to the local storage
+      SaveTrainerData();
+    }
 
-    // Show the password input field
-    document.getElementById("passwordContainer").style.display = "block";
+    function SaveTrainerData() {
+      let image = trainerData.image;
 
-    // Remove readonly from the input fields
-    document.getElementById("trainerFirstName").readOnly = false;
-    document.getElementById("trainerLastName").readOnly = false;
-    document.getElementById("trainerEmail").readOnly = false;
-  }
+      // Save the data to local storage
+      localStorage.setItem(
+        `trainerData-${id}`,
+        JSON.stringify({
+          trainerFirstName: document.getElementById("trainerFirstName").value,
+          trainerLastName: document.getElementById("trainerLastName").value,
+          trainerEmail: document.getElementById("trainerEmail").value,
+          trainerPassword: document.getElementById("trainerPassword").value,
+          image: image,
+          isLoggedIn: "true",
+        })
+      );
 
-  function SaveChanges() {
-    // Show the edit button
-    document.getElementById("editButton").style.display = "table-column";
+      // Save the data to local storage
+      localStorage.setItem(
+        `trainerFirstName-${id}`,
+        document.getElementById("trainerFirstName").value
+      );
+      localStorage.setItem(
+        `trainerLastName-${id}`,
+        document.getElementById("trainerLastName").value
+      );
+      localStorage.setItem(
+        `trainerEmail-${id}`,
+        document.getElementById("trainerEmail").value
+      );
+      localStorage.setItem(
+        `trainerPassword-${id}`,
+        document.getElementById("trainerPassword").value
+      );
+    }
 
-    // Hide the save button
-    document.getElementById("saveButton").style.display = "none";
+    function LoadTrainerData(id) {
+      // Get the data from local storage
+      let getData = JSON.parse(localStorage.getItem(`trainerData-${id}`));
 
-    // Hide the password input field
-    document.getElementById("passwordContainer").style.display = "none";
+      return getData;
+    }
 
-    // Add readonly to the input fields
-    document.getElementById("trainerFirstName").readOnly = true;
-    document.getElementById("trainerLastName").readOnly = true;
-    document.getElementById("trainerEmail").readOnly = true;
+    function GetCurrentlyLoggedInId() {
+      // Loop through all the trainers' isLoggedIn key in local storage till we find the one that is true
+      for (let key in Object.keys(localStorage)) {
+        // Get the key name
+        let keyName = Object.keys(localStorage)[key].split("-")[0];
+        // Check if the key name is trainerData
+        if (keyName == trainerDataKey) {
+          let getData = JSON.parse(
+            localStorage.getItem(Object.keys(localStorage)[key])
+          );
+          if (getData.isLoggedIn == "true") {
+            // Get the trainer id
+            let id = Object.keys(localStorage)[key].split("-")[1];
 
-    // Save the changes to the local storage
-    SaveTrainerData();
-  }
-
-  function SaveTrainerData() {
-    let image = trainerData.image;
-
-    // Save the data to local storage
-    localStorage.setItem(
-      `trainerData-${id}`,
-      JSON.stringify({
-        trainerFirstName: document.getElementById("trainerFirstName").value,
-        trainerLastName: document.getElementById("trainerLastName").value,
-        trainerEmail: document.getElementById("trainerEmail").value,
-        trainerPassword: document.getElementById("trainerPassword").value,
-        image: image,
-        isLoggedIn: "true",
-      })
-    );
-
-    // Save the data to local storage
-    localStorage.setItem(
-      `trainerFirstName-${id}`,
-      document.getElementById("trainerFirstName").value
-    );
-    localStorage.setItem(
-      `trainerLastName-${id}`,
-      document.getElementById("trainerLastName").value
-    );
-    localStorage.setItem(
-      `trainerEmail-${id}`,
-      document.getElementById("trainerEmail").value
-    );
-    localStorage.setItem(
-      `trainerPassword-${id}`,
-      document.getElementById("trainerPassword").value
-    );
-  }
-
-  function LoadTrainerData(id) {
-    // Get the data from local storage
-    let getData = JSON.parse(localStorage.getItem(`trainerData-${id}`));
-
-    return getData;
-  }
-
-  function GetCurrentlyLoggedInId() {
-    // Loop through all the trainers' isLoggedIn key in local storage till we find the one that is true
-    for (let key in Object.keys(localStorage)) {
-      // Get the key name
-      let keyName = Object.keys(localStorage)[key].split("-")[0];
-      // Check if the key name is trainerData
-      if (keyName == trainerDataKey) {
-        let getData = JSON.parse(
-          localStorage.getItem(Object.keys(localStorage)[key])
-        );
-        if (getData.isLoggedIn == "true") {
-          // Get the trainer id
-          let id = Object.keys(localStorage)[key].split("-")[1];
-
-          // Return the trainer id
-          return id;
+            // Return the trainer id
+            return id;
+          }
         }
       }
     }
-  }
 
-  function LocalStorageMockData() {
-    localStorage.clear();
+    function LocalStorageMockData() {
+      // localStorage.clear();
 
-    localStorage.setItem(
-      "trainerData-1",
-      JSON.stringify({
-        trainerFirstName: "Haitham",
-        trainerLastName: "Alrawi",
-        trainerEmail: "haitham.alrawi19@gmail.com",
-        trainerPassword: "123456789",
-        trainerImage:
-          "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-        isLoggedIn: "false",
-      })
-    );
+      localStorage.setItem(
+        "trainerData-1",
+        JSON.stringify({
+          trainerFirstName: "Haitham",
+          trainerLastName: "Alrawi",
+          trainerEmail: "haitham.alrawi19@gmail.com",
+          trainerPassword: "123456789",
+          trainerImage:
+            "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
+          isLoggedIn: "false",
+        })
+      );
 
-    localStorage.setItem(
-      "trainerData-2",
-      JSON.stringify({
-        trainerFirstName: "Haitham",
-        trainerLastName: "Alrawi",
-        trainerEmail: "haitham.alrawi19@gmail.com",
-        trainerPassword: "123456789",
-        trainerImage:
-          "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-        isLoggedIn: "false",
-      })
-    );
+      localStorage.setItem(
+        "trainerData-2",
+        JSON.stringify({
+          trainerFirstName: "Haitham",
+          trainerLastName: "Alrawi",
+          trainerEmail: "haitham.alrawi19@gmail.com",
+          trainerPassword: "123456789",
+          trainerImage:
+            "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
+          isLoggedIn: "false",
+        })
+      );
 
-    localStorage.setItem(
-      "trainerData-3",
-      JSON.stringify({
-        trainerFirstName: "Haitham",
-        trainerLastName: "Alrawi",
-        trainerEmail: "haitham.alrawi19@gmail.com",
-        trainerPassword: "123456789",
-        trainerImage:
-          "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-        isLoggedIn: "true",
-      })
-    );
+      localStorage.setItem(
+        "trainerData-3",
+        JSON.stringify({
+          trainerFirstName: "Haitham",
+          trainerLastName: "Alrawi",
+          trainerEmail: "haitham.alrawi19@gmail.com",
+          trainerPassword: "123456789",
+          trainerImage:
+            "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
+          isLoggedIn: "true",
+        })
+      );
 
-    localStorage.setItem(
-      "trainerData-4",
-      JSON.stringify({
-        trainerFirstName: "Haitham",
-        trainerLastName: "Alrawi",
-        trainerEmail: "haitham.alrawi19@gmail.com",
-        trainerPassword: "123456789",
-        trainerImage:
-          "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-        isLoggedIn: "false",
-      })
-    );
+      localStorage.setItem(
+        "trainerData-4",
+        JSON.stringify({
+          trainerFirstName: "Haitham",
+          trainerLastName: "Alrawi",
+          trainerEmail: "haitham.alrawi19@gmail.com",
+          trainerPassword: "123456789",
+          trainerImage:
+            "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
+          isLoggedIn: "false",
+        })
+      );
 
-    localStorage.setItem(
-      "trainerData-5",
-      JSON.stringify({
-        trainerFirstName: "Haitham",
-        trainerLastName: "Alrawi",
-        trainerEmail: "haitham.alrawi19@gmail.com",
-        trainerPassword: "123456789",
-        trainerImage:
-          "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
-        isLoggedIn: "false",
-      })
-    );
-  }
-
-
-</script>
-
-
-
-
+      localStorage.setItem(
+        "trainerData-5",
+        JSON.stringify({
+          trainerFirstName: "Haitham",
+          trainerLastName: "Alrawi",
+          trainerEmail: "haitham.alrawi19@gmail.com",
+          trainerPassword: "123456789",
+          trainerImage:
+            "https://edtech4beginnerscom.files.wordpress.com/2021/05/1.png",
+          isLoggedIn: "false",
+        })
+      );
+    }
+  </script>
 </html>
