@@ -175,7 +175,7 @@
     </label> <br>
     <textarea id="Feedback" name="Feedback" maxlength="120" cols="25" rows="6">Please write a feedback</textarea>
     <div><button onclick="addFeedback()">Save</button></div>
-</div>
+  </div>
 
   <!-- Table for displaying trainees' information -->
   <table id="traineesTable">
@@ -189,6 +189,23 @@
         <th>Number of Absence</th>
         <th>counter of Absence</th>
         <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <hr>
+  <div id="d1">
+    <h1>FeedBack</h1>
+  </div>
+  <hr>
+  <table id="feedbackTable">
+    <thead>
+      <tr>
+        <th>Student</th>
+        <th>Trainer</th>
+        <th>Feedback</th>
+        <th>Date</th>
       </tr>
     </thead>
     <tbody>
@@ -226,28 +243,8 @@
     }
 
     // Function to add a new row to the table
-    function AddtoTable() {
-      // Get input values
-      var studentName = document.getElementById("studentName").value;
-      var studentID = document.getElementById("studentID").value;
-      var taskValue = document.getElementById("s_task").value;
-      var absent = document.getElementById("absent").value;
-     var studentTasks = {};
-     var newStudent = false;
-
-     console.log(studentID);
-
-// Check if the student ID is already in the object
-if (studentTasks[studentID]) {
-  // Update the tasks array for the existing student
-  studentTasks[studentID] = (totalTask + parseInt(taskValue));
-} else {
-  // Create a new tasks array for the student
-  studentTasks[studentID] = totalTask + parseInt(taskValue);
-  newStudent = true;
-}
-
-  if (newStudent) {
+    // Function to add a row to the table
+    function addRowToTable(allData) {
       // Get the table and its body
       var table = document.getElementById("traineesTable").getElementsByTagName('tbody')[0];
 
@@ -264,20 +261,98 @@ if (studentTasks[studentID]) {
       var counterAbsent = newRow.insertCell(6); // counter of absence student
       var removeCell = newRow.insertCell(7);  // button for removing row
 
-
       // Populate cells with values
-      idCell.innerHTML = studentID;
-      nameCell.innerHTML = studentName;
+      idCell.innerHTML = allData.studentID;
+      nameCell.innerHTML = allData.studentName;
       solvedTasksCell.innerHTML = 0;
       counterS_task.innerHTML = '<button onclick="counterS_task(this)" class="Btn">(+)</button>';
-      totalTaskCell.innerHTML = studentTasks[studentID];
-      numberOfAbsenceCell.innerHTML = absent;
+      totalTaskCell.innerHTML = allData.studentTasks[allData.studentID];
+      numberOfAbsenceCell.innerHTML = allData.absent;
       counterAbsent.innerHTML = '<button onclick="counterAbsent(this)" class="Btn">(+)</button>';
       removeCell.innerHTML = '<button onclick="removeRow(this)" id="btnR">Remove</button>';
-  }
-
-      console.log(studentTasks);
     }
+
+    // Function to add data to the table and local storage
+    // Function to add a row to the table
+    function addRowToTable(allData) {
+      // Get the table and its body
+      var table = document.getElementById("traineesTable").getElementsByTagName('tbody')[0];
+
+      // Insert a new row
+      var newRow = table.insertRow(table.rows.length);
+
+      // Insert cells into the new row
+      var idCell = newRow.insertCell(0);
+      var nameCell = newRow.insertCell(1);
+      var solvedTasksCell = newRow.insertCell(2);
+      var counterS_task = newRow.insertCell(3); // counter for solved task 
+      var totalTaskCell = newRow.insertCell(4);
+      var numberOfAbsenceCell = newRow.insertCell(5);
+      var counterAbsent = newRow.insertCell(6); // counter of absence student
+      var removeCell = newRow.insertCell(7);  // button for removing row
+
+      // Populate cells with values
+      idCell.innerHTML = allData.studentID;
+      nameCell.innerHTML = allData.studentName;
+      solvedTasksCell.innerHTML = 0;
+      counterS_task.innerHTML = '<button onclick="counterS_task(this)" class="Btn">(+)</button>';
+      totalTaskCell.innerHTML = allData.studentTasks[allData.studentID];
+      numberOfAbsenceCell.innerHTML = allData.absent;
+      counterAbsent.innerHTML = '<button onclick="counterAbsent(this)" class="Btn">(+)</button>';
+      removeCell.innerHTML = '<button onclick="removeRow(this)" id="btnR">Remove</button>';
+    }
+
+    // Function to add data to the table and local storage
+    function AddtoTable() {
+      var storedData = localStorage.getItem("allData");
+      var allDataArray = storedData ? JSON.parse(storedData) : [];
+      // Parse the existing data or initialize an empty array
+
+      var studentTasks = {};
+      var newStudent = false;
+
+      // Get input values
+      var newDataRow = {
+        studentName: document.getElementById("studentName").value,
+        studentID: document.getElementById("studentID").value,
+        taskValue: document.getElementById("s_task").value,
+        absent: document.getElementById("absent").value,
+        studentTasks: studentTasks
+      };
+
+      // Check if the student ID is already in the object
+      if (newDataRow.studentTasks[newDataRow.studentID]) {
+        // Update the tasks array for the existing student
+        newDataRow.studentTasks[newDataRow.studentID] += parseInt(newDataRow.taskValue) + totalTask;
+      } else {
+        // Create a new tasks array for the student
+        newDataRow.studentTasks[newDataRow.studentID] = parseInt(newDataRow.taskValue) + totalTask;
+        newStudent = true;
+      }
+
+      if (newStudent) {
+        addRowToTable(newDataRow);
+        allDataArray.push(newDataRow); // Add the new row to the array
+      }
+
+      localStorage.setItem("allData", JSON.stringify(allDataArray));
+      alert("These data are saved in local storage");
+    }
+
+    // Function to retrieve data from local storage and populate the table on page load
+    function retriveDataTableLS() {
+      var storedData = localStorage.getItem("allData");
+      if (storedData) {
+        var parsedData = JSON.parse(storedData);
+        parsedData.forEach(function (data) {
+          addRowToTable(data);
+        });
+      }
+    }
+
+    // Call this function on page load
+    window.onload = retriveDataTableLS;
+
 
     // Function to increment the absence counter
     function counterAbsent(button) {
@@ -352,9 +427,67 @@ if (studentTasks[studentID]) {
     }
 
 
-    
 
-</script>
+    function addFeedback() {
+      var studentName = document.getElementById("studentDropdown").value;
+      var feedbackText = document.getElementById("Feedback").value;
+      var currentDate = new Date().toLocaleDateString();
+
+      var feedbackData = JSON.parse(localStorage.getItem('feedbackData')) || [];
+      var userArray = localStorage.getItem("userArray");
+      if (userArray) {
+        var convertData = JSON.parse(userArray);
+        var loggedInTrainer = convertData.find(user => {
+          return user.loginactive === true;
+        });
+      }
+      if(loggedInTrainer){
+        var FirstName = loggedInTrainer.firstName;
+        var LastName = loggedInTrainer.lastName;
+      }
+      var fullName = FirstName + " "+LastName;
+
+      feedbackData.push({
+        student: studentName,
+        trainer:fullName,
+        feedback: feedbackText,
+        date: currentDate
+      });
+
+      localStorage.setItem('feedbackData', JSON.stringify(feedbackData));
+
+
+      // Optional: You can redirect to the Feedback page after saving feedback
+      updateFeedbackTable();
+      alert("feedback added sucssefully :)");
+
+    }
+
+    // Function to update the feedback table
+    function updateFeedbackTable() {
+      var feedbackTable = document.getElementById("feedbackTable").getElementsByTagName('tbody')[0];
+
+      var feedbackData = JSON.parse(localStorage.getItem('feedbackData')) || [];
+
+      feedbackTable.innerHTML = '';
+
+      feedbackData.forEach(function (entry) {
+        var newRow = feedbackTable.insertRow(feedbackTable.rows.length);
+        var studentCell = newRow.insertCell(0);
+        var trainerCell = newRow.insertCell(1);
+        var feedbackCell = newRow.insertCell(2);
+        var dateCell = newRow.insertCell(3);
+
+        studentCell.innerHTML = entry.student;
+        trainerCell.innerHTML = entry.trainer;
+        feedbackCell.innerHTML = entry.feedback;
+        dateCell.innerHTML = entry.date;
+      });
+    }
+      localStorage.removeItem("feedbackData");
+    // Call the function to update the feedback table when the page loads
+    window.onload = updateFeedbackTable;
+  </script>
 
 </body>
 
