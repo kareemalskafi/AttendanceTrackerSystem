@@ -524,12 +524,13 @@
     // Populate cells with values
     idCell.innerHTML = allData.studentID;
     nameCell.innerHTML = allData.studentName;
-    solvedTasksCell.innerHTML = 0;
-    counterS_task.innerHTML = '<button class="button scrolly" onclick="counterS_task(this)" class="Btn">(+)</button>';
+    solvedTasksCell.innerHTML = allData.solvedTasks || 0;
+    counterS_task.innerHTML = '<button class="button scrolly" onclick="counterS_task(this)"> (+)</button>';
     totalTaskCell.innerHTML = allData.studentTasks[allData.studentID];
-    numberOfAbsenceCell.innerHTML = allData.absent;
-    counterAbsent.innerHTML = '<button class="button scrolly" onclick="counterAbsent(this)" class="Btn">(+)</button>';
+    numberOfAbsenceCell.innerHTML = allData.absence || 0;;
+    counterAbsent.innerHTML = '<button class="button scrolly" onclick="counterAbsent(this)"> (+)</button>';
     removeCell.innerHTML = '<button class="button scrolly" onclick="removeRow(this)" id="btnR">Remove</button>';
+   
     populateStudentDropdown();
 
   }
@@ -556,11 +557,11 @@
     // Populate cells with values
     idCell.innerHTML = allData.studentID;
     nameCell.innerHTML = allData.studentName;
-    solvedTasksCell.innerHTML = 0;
-    counterS_task.innerHTML = '<button class="button scrolly" onclick="counterS_task(this)" class="Btn">(+)</button>';
+    solvedTasksCell.innerHTML = allData.solvedTasks || 0;
+    counterS_task.innerHTML = '<button class="button scrolly" onclick="counterS_task(this)" >(+)</button>';
     totalTaskCell.innerHTML = allData.studentTasks[allData.studentID];
-    numberOfAbsenceCell.innerHTML = allData.absent;
-    counterAbsent.innerHTML = '<button class="button scrolly" onclick="counterAbsent(this)" class="Btn">(+)</button>';
+    numberOfAbsenceCell.innerHTML = allData.absence || 0;
+    counterAbsent.innerHTML = '<button class="button scrolly" onclick="counterAbsent(this)" >(+)</button>';
     removeCell.innerHTML = '<button class="button scrolly" onclick="removeRow(this)" id="btnR">Remove</button>';
     populateStudentDropdown();
 
@@ -640,6 +641,11 @@
 
     // Update the cell with the new count
     counterAbsentCell.innerText = currentCount;
+
+    var studentID = row.cells[0].innerText;
+
+  // Update the value in localStorage
+  updateLocalStorage(studentID, 'absence', currentCount.toString());
   }
 
   // Function to increment the solved tasks counter
@@ -658,6 +664,12 @@
 
     // Update the cell with the new count
     counterS_taskCell.innerText = currentCount;
+
+     // Get the student ID from the row (assuming it's in the first cell)
+  var studentID = row.cells[0].innerText;
+
+// Update the value in localStorage
+updateLocalStorage(studentID, 'solvedTasks', currentCount.toString());
   }
 
   // Function to remove a row
@@ -719,7 +731,24 @@
     }
   }
 
+// Function to update the localStorage data
+function updateLocalStorage(studentID, key, value) {
+  var storedData = localStorage.getItem("allData");
+  if (storedData) {
+    var parsedData = JSON.parse(storedData);
 
+    // Find the student data by ID
+    var studentData = parsedData.find(function(data) {
+      return data.studentID === studentID;
+    });
+
+    // Update the specific key in the student's data
+    if (studentData) {
+      studentData[key] = value;
+      localStorage.setItem("allData", JSON.stringify(parsedData));
+    }
+  }
+}
 
   function addFeedback() {
     var studentName = document.getElementById("studentDropdown").value;
