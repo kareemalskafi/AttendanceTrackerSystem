@@ -284,7 +284,6 @@ ol.default li {
 
 /* Forms */
 
-
 form label {
   display: block;
   text-align: left;
@@ -310,7 +309,6 @@ form textarea {
   -ms-transition: all 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
 }
-
 
 form input.text:focus,
 form select:focus,
@@ -1662,7 +1660,6 @@ table.default tfoot {
   top: 0;
 }
 
-
 #nav ul li a {
   display: block;
   padding: 0.5em 1.5em 0.5em 1.5em;
@@ -1696,7 +1693,6 @@ table.default tfoot {
   box-shadow: inset 0 0 0.25em 0 rgba(0, 0, 0, 0.125);
   color: #fff;
 }
-
 
 #nav ul li a.active span:before {
   color: #e27689;
@@ -1804,59 +1800,6 @@ table.default tfoot {
   text-decoration: none;
   cursor: pointer;
 }
-/*
-abd
-*/
-/* styles.css */
-
-/* Apply some basic styling to the to-do list section */
-#note {
-  background-color: #f4f4f4;
-  padding: 20px;
-  margin: 20px 0;
-}
-
-/* Style the header */
-#note h2 {
-  color: #333;
-}
-
-/* Style the input and button */
-#todo-item {
-  padding: 8px;
-  margin-right: 8px;
-}
-
-#add-item {
-  padding: 8px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-/* Style the to-do list items */
-#todo-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-#todo-list li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 4px;
-}
-
-/* Style the checkbox */
-#todo-list input[type="checkbox"] {
-  margin:auto;
-}
-
-/* Style the list item text */
-#todo-list li span {
-  flex:2;
-}
-
 
 /*********************************************************************************/
 /*                 Haitham CSS Style                                             */
@@ -1930,109 +1873,163 @@ abd
 /*                 Yousef Style                                             */
 /*********************************************************************************/
 
+.trainees body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  text-align: center;
+  background-color: #5a5757;
+  color: white;
+  font-size: 16px;
+}
 
-    .trainees body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      text-align: center;
-      background-color: #5a5757;
-      color: white;
-      font-size: 16px;
-    }
+.trainees #d1 {
+  background-color: rgb(0, 68, 71);
+}
 
-    .trainees #d1 {
-      background-color: rgb(0, 68, 71);
-    }
+.trainees h1 {
+  color: rgb(194, 193, 193);
+  border-color: #366e70;
+  border-width: 6px;
+  font-weight: bolder;
+}
 
-    .trainees h1 {
-      color: rgb(194, 193, 193);
-      border-color: #366e70;
-      border-width: 6px;
-      font-weight: bolder;
-    }
+.trainees hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
 
-    .trainees hr {
-      margin: 20px 0;
-      border: 0;
-      border-top: 1px solid #ccc;
-    }
+.trainees button {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
 
-    .trainees button {
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 10px;
-    }
+.trainees #addNewStudent,
+#addNewTask,
+#addNewFeedback {
+  display: none;
+  margin: 20px auto;
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  border-width: 4px;
+  background-color: #5a5757;
+  font-size: 16px;
+}
 
-    .trainees #addNewStudent,
-    #addNewTask,
-    #addNewFeedback {
-      display: none;
-      margin: 20px auto;
-      max-width: 400px;
-      padding: 20px;
-      border: 1px solid #000000;
-      border-radius: 5px;
-      border-width: 4px;
-      background-color: #5a5757;
-      font-size: 16px;
-    }
+.trainees ::placeholder {
+  color: rgb(216, 209, 209);
+}
 
-    .trainees ::placeholder {
-      color: rgb(216, 209, 209);
-    }
+.trainees label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+  color: white;
+  font-size: 16px;
+}
 
-    .trainees label {
-      display: block;
-      margin-bottom: 5px;
-      text-align: left;
-      color: white;
-      font-size: 16px;
-    }
+.trainees input,
+select,
+textarea {
+  width: 100%;
+  padding: 4px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  background-color: #333;
+  color: rgb(216, 209, 209);
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+}
 
-    .trainees input,
-    select,
-    textarea {
-      width: 100%;
-      padding: 4px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
-      background-color: #333;
-      color: rgb(216, 209, 209);
-      border: none;
-      border-radius: 3px;
-      font-size: 16px;
-    }
+.trainees table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: solid;
+  border-color: #ccc;
+}
 
-    .trainees table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      border: solid;
-      border-color: #ccc;
-    }
+.trainees th,
+td {
+  border: 1px solid #fff;
+  padding: 8px;
+  text-align: center;
+}
 
-    .trainees th,
-    td {
-      border: 1px solid #fff;
-      padding: 8px;
-      text-align: center;
-    }
+.trainees th {
+  background-color: rgb(0, 68, 71);
+  color: white;
+}
 
-    .trainees th {
-      background-color: rgb(0, 68, 71);
-      color: white;
-    }
+.trainees tr:nth-child(even) {
+  background-color: #792d2d;
+}
 
-    .trainees tr:nth-child(even) {
-      background-color: #792d2d;
+.trainees tr:nth-child(odd) {
+  background-color: rgb(14, 72, 77);
+}
 
-    }
+/*********************************************************************************/
+/*                 Abed Style Note                                             */
+/*********************************************************************************/
+
+.note-entry {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+#taskInput {
+  width: 75%;
+}
+
+.note-filter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+#filterSelect {
+  width: fit-content;
+  margin-right: 50px;
+}
+
+#taskList {
+  direction: rtl;
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px 50px;
+}
+
+#taskList li {
+  display: flex;
+  align-items: center;
+  margin: 30px;
+}
+
+#taskList input[type="checkbox"] {
+  margin: auto;
+  max-width: fit-content;
+}
+
+#taskList li span {
+  display: flex;
+  justify-content: flex-end;
+  flex: 2;
+}
 
 
-    .trainees tr:nth-child(odd) {
-      background-color: rgb(14, 72, 77);
-    }
+#taskList li i {
+ margin-right: 10px;
+}
 
+#taskList li i:hover {
+  color: red;
+ }
