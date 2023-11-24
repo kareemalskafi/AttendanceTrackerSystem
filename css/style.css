@@ -284,8 +284,6 @@ ol.default li {
 
 /* Forms */
 
-form {
-}
 
 form label {
   display: block;
@@ -297,7 +295,6 @@ form input.text,
 form select,
 form textarea {
   position: relative;
-  -webkit-appearance: none;
   display: block;
   border: 0;
   background: #fff;
@@ -314,10 +311,6 @@ form textarea {
   transition: all 0.35s ease-in-out;
 }
 
-form input.text:hover,
-form select:hover,
-form textarea:hover {
-}
 
 form input.text:focus,
 form select:focus,
@@ -387,9 +380,6 @@ table.default thead {
 
 table.default tfoot {
   background: #eee;
-}
-
-table.default tbody {
 }
 
 /* Buttons */
@@ -465,8 +455,6 @@ table.default tbody {
 
 /*********************************************************************************/
 /* Icons                                                                         */
-/* Powered by Font Awesome by Dave Gandy | http://fontawesome.io                 */
-/* Licensed under the SIL OFL 1.1 (font), MIT (CSS)                              */
 /*********************************************************************************/
 
 .icon {
@@ -492,7 +480,6 @@ table.default tbody {
   -moz-font-smoothing: antialiased;
   -ms-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
-  font-smoothing: antialiased;
 }
 
 .icon-glass:before {
@@ -1675,14 +1662,6 @@ table.default tbody {
   top: 0;
 }
 
-#nav {
-}
-
-#nav ul {
-}
-
-#nav ul li {
-}
 
 #nav ul li a {
   display: block;
@@ -1718,8 +1697,6 @@ table.default tbody {
   color: #fff;
 }
 
-#nav ul li a.active span {
-}
 
 #nav ul li a.active span:before {
   color: #e27689;
@@ -1948,3 +1925,114 @@ abd
     transform: translateX(-100%);
   }
 }
+
+/*********************************************************************************/
+/*                 Yousef Style                                             */
+/*********************************************************************************/
+
+
+    .trainees body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+      background-color: #5a5757;
+      color: white;
+      font-size: 16px;
+    }
+
+    .trainees #d1 {
+      background-color: rgb(0, 68, 71);
+    }
+
+    .trainees h1 {
+      color: rgb(194, 193, 193);
+      border-color: #366e70;
+      border-width: 6px;
+      font-weight: bolder;
+    }
+
+    .trainees hr {
+      margin: 20px 0;
+      border: 0;
+      border-top: 1px solid #ccc;
+    }
+
+    .trainees button {
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    .trainees #addNewStudent,
+    #addNewTask,
+    #addNewFeedback {
+      display: none;
+      margin: 20px auto;
+      max-width: 400px;
+      padding: 20px;
+      border: 1px solid #000000;
+      border-radius: 5px;
+      border-width: 4px;
+      background-color: #5a5757;
+      font-size: 16px;
+    }
+
+    .trainees ::placeholder {
+      color: rgb(216, 209, 209);
+    }
+
+    .trainees label {
+      display: block;
+      margin-bottom: 5px;
+      text-align: left;
+      color: white;
+      font-size: 16px;
+    }
+
+    .trainees input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 4px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      background-color: #333;
+      color: rgb(216, 209, 209);
+      border: none;
+      border-radius: 3px;
+      font-size: 16px;
+    }
+
+    .trainees table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      border: solid;
+      border-color: #ccc;
+    }
+
+    .trainees th,
+    td {
+      border: 1px solid #fff;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .trainees th {
+      background-color: rgb(0, 68, 71);
+      color: white;
+    }
+
+    .trainees tr:nth-child(even) {
+      background-color: #792d2d;
+
+    }
+
+
+    .trainees tr:nth-child(odd) {
+      background-color: rgb(14, 72, 77);
+    }
+

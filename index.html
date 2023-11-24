@@ -34,8 +34,7 @@
           </li>
           <li><a href="#trainees" id="trainees-link" class="skel-panels-ignoreHref"><span
                 class="icon icon-th">Trainees</span></a></li>
-          <li><a href="#feedback" id="feedback-link" class="skel-panels-ignoreHref"><span
-                class="icon icon-user">Feedback</span></a></li>
+
           <li><a href="#note" id="note-link" class="skel-panels-ignoreHref"><span class="icon icon-edit">Note</span></a>
           </li>
           <li><a href="#profile" id="profile-link" class="skel-panels-ignoreHref"><span
@@ -46,8 +45,7 @@
 
     <div class="bottom" style="margin-bottom: 40px;">
       <ul class="icons" style="margin-bottom: inherit; padding-right:50px;">
-        <li><a href="login.html" class="icon icon-signout" 
-            onclick="logOut()">&nbsp;Logout<span>Logout</span></a></li>
+        <li><a href="login.html" class="icon icon-signout" onclick="logOut()">&nbsp;Logout<span>Logout</span></a></li>
       </ul>
     </div>
 
@@ -112,9 +110,83 @@
           includes forms for entering student information, tasks, and feedback. The trainees' details, such as ID, name,
           solved tasks, absence, and counters, are displayed in a table. The interface allows updating counters,
           removing rows, and updating total tasks for all students</p>
-        <div class="row">
+        <div class="trainees">
 
-          yousef
+
+          <!-- Buttons for adding student, task, and feedback -->
+          <button class="button scrolly" onclick="showStudentInput()">Add Student</button>
+          <button class="button scrolly" onclick="showTaskInput()">Add Task</button>
+          <button class="button scrolly" onclick="showFeedbackInput()">Add Feedback</button>
+
+          <!-- Form for adding a new student -->
+          <div id="addNewStudent">
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" placeholder="Enter student name">
+            <label for="studentID">Student ID:</label>
+            <input type="number" id="studentID" min="1" name="studentID" placeholder="Enter student ID">
+            <label for="s_task">Task:</label>
+            <input type="number" id="s_task" min="0" name="s_task" placeholder="Enter task">
+            <label for="absent">Absent:</label>
+            <input type="number" id="absent" min="0" name="absent" placeholder="Enter absent">
+            <div><button class="button scrolly" onclick="AddtoTable()">Save</button></div>
+          </div>
+
+          <!-- Form for adding a new task -->
+          <div id="addNewTask">
+            <label for="task">Add New Task:</label>
+            <input type="number" id="newTaskInput" min="0" name="newTaskInput" placeholder="Enter task">
+            <div><button class="button scrolly" onclick="updateAllTasks()">Save</button></div>
+          </div>
+
+          <!-- Form for adding new feedback -->
+          <div id="addNewFeedback">
+            <label for="studentDropdown">Student Name:
+              <select style="font-size: 16px;" id="studentDropdown">
+
+              </select>
+            </label> <br>
+            <textarea id="Feedback" name="Feedback" maxlength="120" cols="25"
+              rows="3" style="font-size: 16px;">Please write a feedback</textarea>
+            <div><button class="button scrolly" onclick="addFeedback()">Save</button></div>
+          </div>
+
+          <!-- Table for displaying trainees' information -->
+          <table id="traineesTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Solved Tasks</th>
+                <th>counter of solved Tasks</th>
+                <th>Total Task</th>
+                <th>Number of Absence</th>
+                <th>counter of Absence</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <hr>
+
+
+          <div id="d1">
+            <h1>FeedBack</h1>
+          </div>
+          <hr>
+          <table id="feedbackTable">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Trainer</th>
+                <th>Feedback</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+
 
         </div>
       </div>
@@ -123,16 +195,7 @@
 
 
 
-    <section id="feedback" class="three">
-      <div class="container small">
-        <header>
-          <h2>feedback</h2>
-        </header>
 
-        yousef
-
-      </div>
-    </section>
 
 
     <section id="note" class="two">
@@ -397,6 +460,353 @@
 
     window.location.href = 'login.html'; // Redirect to login.html after logout
   }
+</script>
+<!-- Yousef  -->
+
+<script>
+  var totalTask = 20;
+  // Function to show student input
+  function showStudentInput() {
+    // Get the student input div
+    var student = document.getElementById("addNewStudent");
+
+    // Toggle the display property
+    student.style.display = student.style.display === "none" ? "block" : "none";
+
+    document.getElementById("addNewTask").style.display = "none";
+    document.getElementById("addNewFeedback").style.display = "none";
+
+  }
+
+  // Function to show task input
+  function showTaskInput() {
+    // Get the task input div
+    var task = document.getElementById("addNewTask");
+
+    // Toggle the display property
+    task.style.display = task.style.display === "none" ? "block" : "none";
+    document.getElementById("addNewStudent").style.display = "none";
+    document.getElementById("addNewFeedback").style.display = "none";
+
+
+  }
+
+  // Function to show feedback input
+  function showFeedbackInput() {
+    // Get the feedback input div
+    var feedback = document.getElementById("addNewFeedback");
+
+    // Toggle the display property
+    feedback.style.display = feedback.style.display === "none" ? "block" : "none";
+    document.getElementById("addNewStudent").style.display = "none";
+    document.getElementById("addNewTask").style.display = "none";
+  }
+
+  // Function to add a new row to the table
+  // Function to add a row to the table
+  function addRowToTable(allData) {
+    // Get the table and its body
+    var table = document.getElementById("traineesTable").getElementsByTagName('tbody')[0];
+
+    // Insert a new row
+    var newRow = table.insertRow(table.rows.length);
+
+    // Insert cells into the new row
+    var idCell = newRow.insertCell(0);
+    var nameCell = newRow.insertCell(1);
+    var solvedTasksCell = newRow.insertCell(2);
+    var counterS_task = newRow.insertCell(3); // counter for solved task 
+    var totalTaskCell = newRow.insertCell(4);
+    var numberOfAbsenceCell = newRow.insertCell(5);
+    var counterAbsent = newRow.insertCell(6); // counter of absence student
+    var removeCell = newRow.insertCell(7);  // button for removing row
+
+    // Populate cells with values
+    idCell.innerHTML = allData.studentID;
+    nameCell.innerHTML = allData.studentName;
+    solvedTasksCell.innerHTML = 0;
+    counterS_task.innerHTML = '<button class="button scrolly" onclick="counterS_task(this)" class="Btn">(+)</button>';
+    totalTaskCell.innerHTML = allData.studentTasks[allData.studentID];
+    numberOfAbsenceCell.innerHTML = allData.absent;
+    counterAbsent.innerHTML = '<button class="button scrolly" onclick="counterAbsent(this)" class="Btn">(+)</button>';
+    removeCell.innerHTML = '<button class="button scrolly" onclick="removeRow(this)" id="btnR">Remove</button>';
+    populateStudentDropdown();
+
+  }
+
+  // Function to add data to the table and local storage
+  // Function to add a row to the table
+  function addRowToTable(allData) {
+    // Get the table and its body
+    var table = document.getElementById("traineesTable").getElementsByTagName('tbody')[0];
+
+    // Insert a new row
+    var newRow = table.insertRow(table.rows.length);
+
+    // Insert cells into the new row
+    var idCell = newRow.insertCell(0);
+    var nameCell = newRow.insertCell(1);
+    var solvedTasksCell = newRow.insertCell(2);
+    var counterS_task = newRow.insertCell(3); // counter for solved task 
+    var totalTaskCell = newRow.insertCell(4);
+    var numberOfAbsenceCell = newRow.insertCell(5);
+    var counterAbsent = newRow.insertCell(6); // counter of absence student
+    var removeCell = newRow.insertCell(7);  // button for removing row
+
+    // Populate cells with values
+    idCell.innerHTML = allData.studentID;
+    nameCell.innerHTML = allData.studentName;
+    solvedTasksCell.innerHTML = 0;
+    counterS_task.innerHTML = '<button class="button scrolly" onclick="counterS_task(this)" class="Btn">(+)</button>';
+    totalTaskCell.innerHTML = allData.studentTasks[allData.studentID];
+    numberOfAbsenceCell.innerHTML = allData.absent;
+    counterAbsent.innerHTML = '<button class="button scrolly" onclick="counterAbsent(this)" class="Btn">(+)</button>';
+    removeCell.innerHTML = '<button class="button scrolly" onclick="removeRow(this)" id="btnR">Remove</button>';
+    populateStudentDropdown();
+
+  }
+
+  // Function to add data to the table and local storage
+  function AddtoTable() {
+    var storedData = localStorage.getItem("allData");
+    var allDataArray = storedData ? JSON.parse(storedData) : [];
+    // Parse the existing data or initialize an empty array
+
+    var studentTasks = {};
+    var newStudent = false;
+
+    // Get input values
+    var newDataRow = {
+      studentName: document.getElementById("studentName").value,
+      studentID: document.getElementById("studentID").value,
+      taskValue: document.getElementById("s_task").value,
+      absent: document.getElementById("absent").value,
+      studentTasks: studentTasks
+    };
+
+    // Check if the student ID is already in the object
+    if (newDataRow.studentTasks[newDataRow.studentID]) {
+      // Update the tasks array for the existing student
+      newDataRow.studentTasks[newDataRow.studentID] += parseInt(newDataRow.taskValue) + totalTask;
+    } else {
+      // Create a new tasks array for the student
+      newDataRow.studentTasks[newDataRow.studentID] = parseInt(newDataRow.taskValue) + totalTask;
+      newStudent = true;
+    }
+
+    if (newStudent) {
+      addRowToTable(newDataRow);
+      allDataArray.push(newDataRow); // Add the new row to the array
+    }
+
+    localStorage.setItem("allData", JSON.stringify(allDataArray));
+    alert("These data are saved in local storage");
+    populateStudentDropdown();
+
+  }
+
+  // Function to retrieve data from local storage and populate the table on page load
+  function retriveDataTableLS() {
+    var storedData = localStorage.getItem("allData");
+    if (storedData) {
+      var parsedData = JSON.parse(storedData);
+      parsedData.forEach(function (data) {
+        addRowToTable(data);
+      });
+    }
+    populateStudentDropdown();
+  }
+
+
+
+
+
+
+
+
+  // Function to increment the absence counter
+  function counterAbsent(button) {
+    // Get the row of the clicked button
+    var row = button.parentNode.parentNode;
+
+    // Get the cell containing the absence number
+    var counterAbsentCell = row.cells[5];
+
+    // Get the current number of absense
+    var currentCount = parseInt(counterAbsentCell.innerText);
+
+    // Increment the count
+    currentCount++;
+
+    // Update the cell with the new count
+    counterAbsentCell.innerText = currentCount;
+  }
+
+  // Function to increment the solved tasks counter
+  function counterS_task(button) {
+    // Get the row of the clicked button
+    var row = button.parentNode.parentNode;
+
+    // Get the cell containing the solved tasks counter
+    var counterS_taskCell = row.cells[2];
+
+    // Get the current count
+    var currentCount = parseInt(counterS_taskCell.innerText);
+
+    // Increment the count
+    currentCount++;
+
+    // Update the cell with the new count
+    counterS_taskCell.innerText = currentCount;
+  }
+
+  // Function to remove a row
+  // Function to remove a row and its associated data from localStorage
+  function removeRow(button) {
+    // Get the row of the clicked button
+    var row = button.parentNode.parentNode;
+
+    // Get the student ID from the row (assuming it's in the first cell)
+    var studentID = row.cells[0].innerText;
+
+    // Remove the row from its parent (the table body)
+    row.parentNode.removeChild(row);
+
+    // Remove the corresponding data from localStorage
+    var storedData = localStorage.getItem("allData");
+    if (storedData) {
+      var parsedData = JSON.parse(storedData);
+
+      // Find the index of the data with the matching student ID
+      var dataIndex = parsedData.findIndex(function (data) {
+        return data.studentID === studentID;
+      });
+
+      if (dataIndex !== -1) {
+        parsedData.splice(dataIndex, 1); // Remove the data entry
+        localStorage.setItem("allData", JSON.stringify(parsedData)); // Update localStorage
+      }
+    }
+    populateStudentDropdown();
+
+  }
+
+
+  // Function to update total tasks for all rows
+  function updateAllTasks() {
+    // Get the table body
+    var tableBody = document.getElementById("traineesTable").getElementsByTagName('tbody')[0];
+
+    // Get all rows in the table body
+    var rows = tableBody.getElementsByTagName('tr');
+
+    // Get the new task input value
+    var newTask = document.getElementById("newTaskInput").value;
+
+    // Loop through each row
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+
+      // Get the total task cell for the current row
+      var totalTaskCell = row.cells[4];
+
+      // Update the total task based on the new task input
+      var currentTotalTasks = parseInt(totalTaskCell.innerText) || 0;
+      var updatedTotalTasks = currentTotalTasks + parseInt(newTask);
+
+      // Update the total task cell with the new value
+      totalTaskCell.innerText = updatedTotalTasks;
+    }
+  }
+
+
+
+  function addFeedback() {
+    var studentName = document.getElementById("studentDropdown").value;
+    var feedbackText = document.getElementById("Feedback").value;
+    var currentDate = new Date().toLocaleDateString();
+
+    var feedbackData = JSON.parse(localStorage.getItem('feedbackData')) || [];
+    var userArray = localStorage.getItem("userArray");
+    if (userArray) {
+      var convertData = JSON.parse(userArray);
+      var loggedInTrainer = convertData.find(user => {
+        return user.loginactive === true;
+      });
+    }
+    if (loggedInTrainer) {
+      var FirstName = loggedInTrainer.firstName;
+      var LastName = loggedInTrainer.lastName;
+    }
+    var fullName = FirstName + " " + LastName;
+
+    feedbackData.push({
+      student: studentName,
+      trainer: fullName,
+      feedback: feedbackText,
+      date: currentDate
+    });
+
+    localStorage.setItem('feedbackData', JSON.stringify(feedbackData));
+
+
+    // Optional: You can redirect to the Feedback page after saving feedback
+    updateFeedbackTable();
+    alert("feedback added sucssefully :)");
+
+  }
+
+  // Function to update the feedback table
+  function updateFeedbackTable() {
+    var feedbackTable = document.getElementById("feedbackTable").getElementsByTagName('tbody')[0];
+
+    var feedbackData = JSON.parse(localStorage.getItem('feedbackData')) || [];
+
+    feedbackTable.innerHTML = '';
+
+    feedbackData.forEach(function (entry) {
+      var newRow = feedbackTable.insertRow(feedbackTable.rows.length);
+      var studentCell = newRow.insertCell(0);
+      var trainerCell = newRow.insertCell(1);
+      var feedbackCell = newRow.insertCell(2);
+      var dateCell = newRow.insertCell(3);
+
+      studentCell.innerHTML = entry.student;
+      trainerCell.innerHTML = entry.trainer;
+      feedbackCell.innerHTML = entry.feedback;
+      dateCell.innerHTML = entry.date;
+    });
+  }
+
+
+  // Function to populate the student dropdown with options from localStorage
+  function populateStudentDropdown() {
+    var storedData = localStorage.getItem("allData");
+    if (storedData) {
+      var parsedData = JSON.parse(storedData);
+      var dropdown = document.getElementById("studentDropdown");
+
+      // Clear existing options
+      dropdown.innerHTML = "";
+
+      // Add options based on the student names from localStorage
+      parsedData.forEach(function (data) {
+        var option = document.createElement("option");
+        option.value = data.studentName;
+        option.textContent = data.studentName;
+        dropdown.appendChild(option);
+      });
+    }
+  }
+
+
+
+  // Call this function to update the table when the page loads
+  window.onload = function () {
+    populateStudentDropdown();
+    retriveDataTableLS();
+    updateFeedbackTable();
+  };
 </script>
 
 <script></script>
