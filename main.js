@@ -25,13 +25,26 @@ const loginUser = () => {
 //---------------------------------------------------------------------------------------------------------------//
 
 const registerUser = () => {
-  var firstName = document.getElementById("firstName").value;
-  var lastName = document.getElementById("lastName").value;
-  var email = document.getElementById("email").value;
-  var password = document.getElementById("password").value;
-  var loginactive = false;
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const loginactive = false;
 
-  var user = {
+  // Basic form validation
+  if (firstName === "" || lastName === "" || email === "" || password === "") {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  // Email validation using a simple regex pattern
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
+  const user = {
     firstName: firstName,
     lastName: lastName,
     email: email,
@@ -39,8 +52,8 @@ const registerUser = () => {
     loginactive: loginactive,
   };
 
-  var existingUsers = JSON.parse(localStorage.getItem("userArray")) || [];
-  var isEmailTaken = existingUsers.some((user) => {
+  const existingUsers = JSON.parse(localStorage.getItem("userArray")) || [];
+  const isEmailTaken = existingUsers.some((user) => {
     return user.email === email;
   });
 
@@ -158,38 +171,6 @@ function showFeedbackInput() {
   document.getElementById("addNewTask").style.display = "none";
 }
 
-// Function to add a new row to the table
-// Function to add a row to the table
-function addRowToTable(allData) {
-  // Get the table and its body
-  var table = document
-    .getElementById("traineesTable")
-    .getElementsByTagName("tbody")[0];
-  // Insert a new row
-  var newRow = table.insertRow(table.rows.length);
-  // Insert cells into the new row
-  var idCell = newRow.insertCell(0);
-  var nameCell = newRow.insertCell(1);
-  var solvedTasksCell = newRow.insertCell(2);
-  var counterS_task = newRow.insertCell(3); // counter for solved task
-  var totalTaskCell = newRow.insertCell(4);
-  var numberOfAbsenceCell = newRow.insertCell(5);
-  var counterAbsent = newRow.insertCell(6); // counter of absence student
-  var removeCell = newRow.insertCell(7); // button for removing row
-  // Populate cells with values
-  idCell.innerHTML = allData.studentID;
-  nameCell.innerHTML = allData.studentName;
-  solvedTasksCell.innerHTML = allData.solvedTasks || 0;
-  counterS_task.innerHTML =
-    '<button class="button" onclick="counterS_task(this)"> (+)</button>';
-  totalTaskCell.innerHTML = allData.studentTasks[allData.studentID];
-  numberOfAbsenceCell.innerHTML = allData.absence || allData.absent;
-  counterAbsent.innerHTML =
-    '<button class="button" onclick="counterAbsent(this)"> (+)</button>';
-  removeCell.innerHTML =
-    '<button class="button" onclick="removeRow(this)" id="btnR">Remove</button>';
-  populateStudentDropdown();
-}
 
 // Function to add data to the table and local storage
 // Function to add a row to the table
@@ -329,18 +310,50 @@ function removeRow(button) {
 
     if (dataIndex !== -1) {
       parsedData.splice(dataIndex, 1); // Remove the data entry
-      localStorage.setItem("allData", JSON.stringify(parsedData)); 
+      localStorage.setItem("allData", JSON.stringify(parsedData));
     }
   }
   populateStudentDropdown();
 }
+// Function to load data from localStorage and update the table
+function loadLocalStorageData() {
+  var storedData = localStorage.getItem("allData");
+  if (storedData) {
+    var parsedData = JSON.parse(storedData);
+    updateTableWithLocalStorageData(parsedData);
+  }
+}
 
-// Function to update total tasks for all rows
+// Function to update the table with data from localStorage
+function updateTableWithLocalStorageData(data) {
+  // Get the table body
+  var tableBody = document.getElementById("traineesTable").getElementsByTagName("tbody")[0];
+  // Get all rows in the table body
+  var rows = tableBody.getElementsByTagName("tr");
+
+  // Loop through each row
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    // Get the student ID from the first cell of the current row
+    var studentID = row.cells[0].innerText;
+
+    // Find the student data by ID
+    var studentData = data.find(function (data) {
+      return data.studentID === studentID;
+    });
+
+    // Update the total task cell with the value from localStorage
+    if (studentData) {
+      var totalTaskCell = row.cells[4];
+      totalTaskCell.innerText = studentData.totalTasks || 0;
+    }
+  }
+}
+
+// Function to update all tasks
 function updateAllTasks() {
   // Get the table body
-  var tableBody = document
-    .getElementById("traineesTable")
-    .getElementsByTagName("tbody")[0];
+  var tableBody = document.getElementById("traineesTable").getElementsByTagName("tbody")[0];
   // Get all rows in the table body
   var rows = tableBody.getElementsByTagName("tr");
   // Get the new task input value
@@ -348,33 +361,56 @@ function updateAllTasks() {
   // Loop through each row
   for (var i = 0; i < rows.length; i++) {
     var row = rows[i];
+    // Get the student ID from the first cell of the current row
+    var studentID = row.cells[0].innerText;
     // Get the total task cell for the current row
     var totalTaskCell = row.cells[4];
     // Update the total task based on the new task input
     var currentTotalTasks = parseInt(totalTaskCell.innerText) || 0;
-    var updatedTotalTasks = currentTotalTasks + parseInt(newTask);
-    // Update the total task cell with the new value
-    totalTaskCell.innerText = updatedTotalTasks;
+    var newTaskValue = parseInt(newTask);
+    if (!isNaN(newTaskValue)) {
+      var updatedTotalTasks = currentTotalTasks + newTaskValue;
+
+      // Update the local storage and get the updated value
+      updateLocalStorage(studentID, "totalTasks", updatedTotalTasks);
+
+      // Update the total task cell with the new value
+      totalTaskCell.innerText = updatedTotalTasks;
+
+    }
   }
+  // Call the function to update the table with the latest data from localStorage
+  loadLocalStorageData();
 }
 
-// Function to update the localStorage data
+// Function to update the localStorage data and return the updated value
 function updateLocalStorage(studentID, key, value) {
   var storedData = localStorage.getItem("allData");
   if (storedData) {
     var parsedData = JSON.parse(storedData);
+
     // Find the student data by ID
     var studentData = parsedData.find(function (data) {
       return data.studentID === studentID;
     });
+
+    // Initialize totalTasks if not present
+    if (studentData && !studentData.totalTasks) {
+      studentData.totalTasks = 0;
+    }
+
     // Update the specific key in the student's data
     if (studentData) {
       studentData[key] = value;
       localStorage.setItem("allData", JSON.stringify(parsedData));
+      // Return the updated value
+      return value;
     }
+
+    // Update the table with the latest data from localStorage
+    updateTableWithLocalStorageData(parsedData);
   }
 }
-
 function addFeedback() {
   var studentName = document.getElementById("studentDropdown").value;
   var feedbackText = document.getElementById("Feedback").value;
@@ -444,12 +480,6 @@ function populateStudentDropdown() {
     });
   }
 }
-// Call this function to update the table when the page loads
-window.onload = function () {
-  populateStudentDropdown();
-  retriveDataTableLS();
-  updateFeedbackTable();
-};
 
 //---------------------------------------------------------------------------------------------------------------//
 //--------------------------------------------  Note  -----------------------------------------------------------//
@@ -481,11 +511,11 @@ function displayTasks() {
     taskText.textContent = task.text;
     const deleteIcon = document.createElement("i");
     deleteIcon.className = "fas fa-trash-alt";
-    deleteIcon.addEventListener("click", () => deleteTask(index)); 
+    deleteIcon.addEventListener("click", () => deleteTask(index));
 
     listItem.appendChild(checkbox);
     listItem.appendChild(taskText);
-    listItem.appendChild(deleteIcon); 
+    listItem.appendChild(deleteIcon);
     taskList.appendChild(listItem);
   });
 }
@@ -632,25 +662,25 @@ displayLoggedInUserData();
 //-------------------------------------------- Trainer Name -----------------------------------------------------//
 //---------------------------------------------------------------------------------------------------------------//
 
-  // Retrieve userArray from localStorage  NAME--------------------------------------------------------------------
-  var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
-  function displayUserArray() {
-    var titleElement = document.getElementById('title');
-    titleElement.innerHTML = '';
-    var loggedInUser = existingUsers.find(function (user) {
-      return user.loginactive === true;
-    });
-    if (loggedInUser) {
-      var h1 = document.createElement('h1');
-      h1.textContent = loggedInUser.firstName;
-      titleElement.appendChild(h1);
-    } else {
-      var noUserMsg = document.createElement('p');
-      noUserMsg.textContent = 'No user is currently logged in.';
-      titleElement.appendChild(noUserMsg);
-    }
+// Retrieve userArray from localStorage  NAME--------------------------------------------------------------------
+var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
+function displayUserArray() {
+  var titleElement = document.getElementById('title');
+  titleElement.innerHTML = '';
+  var loggedInUser = existingUsers.find(function (user) {
+    return user.loginactive === true;
+  });
+  if (loggedInUser) {
+    var h1 = document.createElement('h1');
+    h1.textContent = loggedInUser.firstName;
+    titleElement.appendChild(h1);
+  } else {
+    var noUserMsg = document.createElement('p');
+    noUserMsg.textContent = 'No user is currently logged in.';
+    titleElement.appendChild(noUserMsg);
   }
-  displayUserArray();
+}
+displayUserArray();
 
 
 //---------------------------------------------------------------------------------------------------------------//
@@ -658,15 +688,29 @@ displayLoggedInUserData();
 //---------------------------------------------------------------------------------------------------------------//
 
 
-  function logOut() {
-    var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
-    var loggedInUserIndex = existingUsers.findIndex(function (user) {
-      return user.loginactive === true;
-    });
-    if (loggedInUserIndex !== -1) {
-      existingUsers[loggedInUserIndex].loginactive = false;
-      localStorage.setItem('userArray', JSON.stringify(existingUsers));
-    }
-    window.location.href = 'login.html'; // Redirect to login.html after logout
+function logOut() {
+  var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
+  var loggedInUserIndex = existingUsers.findIndex(function (user) {
+    return user.loginactive === true;
+  });
+  if (loggedInUserIndex !== -1) {
+    existingUsers[loggedInUserIndex].loginactive = false;
+    localStorage.setItem('userArray', JSON.stringify(existingUsers));
   }
+  window.location.href = 'login.html'; // Redirect to login.html after logout
+}
+
+
+//---------------------------------------------------------------------------------------------------------------//
+//--------------------------------------------  Page loads  -----------------------------------------------------//
+//---------------------------------------------------------------------------------------------------------------//
+
+// Call this function to update the table when the page loads
+window.onload = function () {
+  populateStudentDropdown();
+  retriveDataTableLS();
+  updateFeedbackTable();
+  displayTasks();
+  loadLocalStorageData();
+};
 

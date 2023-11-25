@@ -310,13 +310,26 @@
     //---------------------------------------------------------------------------------------------------------------//
 
     const registerUser = () => {
-      var firstName = document.getElementById("firstName").value;
-      var lastName = document.getElementById("lastName").value;
-      var email = document.getElementById("email").value;
-      var password = document.getElementById("password").value;
-      var loginactive = false;
+      const firstName = document.getElementById("firstName").value.trim();
+      const lastName = document.getElementById("lastName").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const loginactive = false;
 
-      var user = {
+      // Basic form validation
+      if (firstName === "" || lastName === "" || email === "" || password === "") {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      // Email validation using a simple regex pattern
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      const user = {
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -324,8 +337,8 @@
         loginactive: loginactive,
       };
 
-      var existingUsers = JSON.parse(localStorage.getItem("userArray")) || [];
-      var isEmailTaken = existingUsers.some((user) => {
+      const existingUsers = JSON.parse(localStorage.getItem("userArray")) || [];
+      const isEmailTaken = existingUsers.some((user) => {
         return user.email === email;
       });
 
@@ -587,102 +600,102 @@
       }
       populateStudentDropdown();
     }
-// Function to load data from localStorage and update the table
-function loadLocalStorageData() {
-  var storedData = localStorage.getItem("allData");
-  if (storedData) {
-    var parsedData = JSON.parse(storedData);
-    updateTableWithLocalStorageData(parsedData);
-  }
-}
-
-// Function to update the table with data from localStorage
-function updateTableWithLocalStorageData(data) {
-  // Get the table body
-  var tableBody = document.getElementById("traineesTable").getElementsByTagName("tbody")[0];
-  // Get all rows in the table body
-  var rows = tableBody.getElementsByTagName("tr");
-
-  // Loop through each row
-  for (var i = 0; i < rows.length; i++) {
-    var row = rows[i];
-    // Get the student ID from the first cell of the current row
-    var studentID = row.cells[0].innerText;
-
-    // Find the student data by ID
-    var studentData = data.find(function (data) {
-      return data.studentID === studentID;
-    });
-
-    // Update the total task cell with the value from localStorage
-    if (studentData) {
-      var totalTaskCell = row.cells[4];
-      totalTaskCell.innerText = studentData.totalTasks || 0;
-    }
-  }
-}
-
-// Function to update all tasks
-function updateAllTasks() {
-  // Get the table body
-  var tableBody = document.getElementById("traineesTable").getElementsByTagName("tbody")[0];
-  // Get all rows in the table body
-  var rows = tableBody.getElementsByTagName("tr");
-  // Get the new task input value
-  var newTask = document.getElementById("newTaskInput").value;
-  // Loop through each row
-  for (var i = 0; i < rows.length; i++) {
-    var row = rows[i];
-    // Get the student ID from the first cell of the current row
-    var studentID = row.cells[0].innerText;
-    // Get the total task cell for the current row
-    var totalTaskCell = row.cells[4];
-    // Update the total task based on the new task input
-    var currentTotalTasks = parseInt(totalTaskCell.innerText) || 0;
-    var newTaskValue = parseInt(newTask);
-    if (!isNaN(newTaskValue)) {
-      var updatedTotalTasks = currentTotalTasks + newTaskValue;
-
-       // Update the local storage and get the updated value
-       updateLocalStorage(studentID, "totalTasks", updatedTotalTasks);
-       
-      // Update the total task cell with the new value
-      totalTaskCell.innerText = updatedTotalTasks;
-     
-    }
-  }
-  // Call the function to update the table with the latest data from localStorage
-  loadLocalStorageData();
-}
-
-// Function to update the localStorage data and return the updated value
-function updateLocalStorage(studentID, key, value) {
-  var storedData = localStorage.getItem("allData");
-  if (storedData) {
-    var parsedData = JSON.parse(storedData);
-
-    // Find the student data by ID
-    var studentData = parsedData.find(function (data) {
-      return data.studentID === studentID;
-    });
-
-    // Initialize totalTasks if not present
-    if (studentData && !studentData.totalTasks) {
-      studentData.totalTasks = 0;
+    // Function to load data from localStorage and update the table
+    function loadLocalStorageData() {
+      var storedData = localStorage.getItem("allData");
+      if (storedData) {
+        var parsedData = JSON.parse(storedData);
+        updateTableWithLocalStorageData(parsedData);
+      }
     }
 
-    // Update the specific key in the student's data
-    if (studentData) {
-      studentData[key] = value;
-      localStorage.setItem("allData", JSON.stringify(parsedData));
-      // Return the updated value
-      return value;
+    // Function to update the table with data from localStorage
+    function updateTableWithLocalStorageData(data) {
+      // Get the table body
+      var tableBody = document.getElementById("traineesTable").getElementsByTagName("tbody")[0];
+      // Get all rows in the table body
+      var rows = tableBody.getElementsByTagName("tr");
+
+      // Loop through each row
+      for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        // Get the student ID from the first cell of the current row
+        var studentID = row.cells[0].innerText;
+
+        // Find the student data by ID
+        var studentData = data.find(function (data) {
+          return data.studentID === studentID;
+        });
+
+        // Update the total task cell with the value from localStorage
+        if (studentData) {
+          var totalTaskCell = row.cells[4];
+          totalTaskCell.innerText = studentData.totalTasks || 0;
+        }
+      }
     }
 
-    // Update the table with the latest data from localStorage
-    updateTableWithLocalStorageData(parsedData);
-  }
-}
+    // Function to update all tasks
+    function updateAllTasks() {
+      // Get the table body
+      var tableBody = document.getElementById("traineesTable").getElementsByTagName("tbody")[0];
+      // Get all rows in the table body
+      var rows = tableBody.getElementsByTagName("tr");
+      // Get the new task input value
+      var newTask = document.getElementById("newTaskInput").value;
+      // Loop through each row
+      for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        // Get the student ID from the first cell of the current row
+        var studentID = row.cells[0].innerText;
+        // Get the total task cell for the current row
+        var totalTaskCell = row.cells[4];
+        // Update the total task based on the new task input
+        var currentTotalTasks = parseInt(totalTaskCell.innerText) || 0;
+        var newTaskValue = parseInt(newTask);
+        if (!isNaN(newTaskValue)) {
+          var updatedTotalTasks = currentTotalTasks + newTaskValue;
+
+          // Update the local storage and get the updated value
+          updateLocalStorage(studentID, "totalTasks", updatedTotalTasks);
+
+          // Update the total task cell with the new value
+          totalTaskCell.innerText = updatedTotalTasks;
+
+        }
+      }
+      // Call the function to update the table with the latest data from localStorage
+      loadLocalStorageData();
+    }
+
+    // Function to update the localStorage data and return the updated value
+    function updateLocalStorage(studentID, key, value) {
+      var storedData = localStorage.getItem("allData");
+      if (storedData) {
+        var parsedData = JSON.parse(storedData);
+
+        // Find the student data by ID
+        var studentData = parsedData.find(function (data) {
+          return data.studentID === studentID;
+        });
+
+        // Initialize totalTasks if not present
+        if (studentData && !studentData.totalTasks) {
+          studentData.totalTasks = 0;
+        }
+
+        // Update the specific key in the student's data
+        if (studentData) {
+          studentData[key] = value;
+          localStorage.setItem("allData", JSON.stringify(parsedData));
+          // Return the updated value
+          return value;
+        }
+
+        // Update the table with the latest data from localStorage
+        updateTableWithLocalStorageData(parsedData);
+      }
+    }
     function addFeedback() {
       var studentName = document.getElementById("studentDropdown").value;
       var feedbackText = document.getElementById("Feedback").value;
