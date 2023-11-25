@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/style-wide.css">
     <link rel="stylesheet" href="css/style.css">
   </noscript>
-  
+
 </head>
 
 <body>
@@ -81,7 +81,7 @@
           automated reporting, and customizable options, making attendance tracking hassle-free for administrators and
           employees alike.</p>
         <footer>
-          <button id="openModalBtnNews" class="button scrolly">Latest News</button>
+          <button id="openModalBtnNews" class="button">Latest News</button>
         </footer>
       </div>
     </section>
@@ -110,9 +110,9 @@
 
 
           <!-- Buttons for adding student, task, and feedback -->
-          <button class="button scrolly" onclick="showStudentInput()">Add Student</button>
-          <button class="button scrolly" onclick="showTaskInput()">Add Task</button>
-          <button class="button scrolly" onclick="showFeedbackInput()">Add Feedback</button>
+          <button class="button" onclick="showStudentInput()">Add Student</button>
+          <button class="button" onclick="showTaskInput()">Add Task</button>
+          <button class="button" onclick="showFeedbackInput()">Add Feedback</button>
 
           <!-- Form for adding a new student -->
           <div id="addNewStudent">
@@ -124,14 +124,14 @@
             <input type="number" id="s_task" min="0" name="s_task" placeholder="Enter task" required>
             <label for="absent">Absent:</label>
             <input type="number" id="absent" min="0" name="absent" placeholder="Enter absent" required>
-            <div><button class="button scrolly" onclick="AddtoTable()">Save</button></div>
+            <div><button class="button" onclick="AddtoTable()">Save</button></div>
           </div>
 
           <!-- Form for adding a new task -->
           <div id="addNewTask">
             <label for="task">Add New Task:</label>
             <input type="number" id="newTaskInput" min="0" name="newTaskInput" placeholder="Enter task">
-            <div><button class="button scrolly" onclick="updateAllTasks()">Save</button></div>
+            <div><button class="button" onclick="updateAllTasks()">Save</button></div>
           </div>
 
           <!-- Form for adding new feedback -->
@@ -143,7 +143,7 @@
             </label> <br>
             <textarea id="Feedback" name="Feedback" maxlength="120" cols="25" rows="3"
               style="font-size: 16px;">Please write a feedback</textarea>
-            <div><button class="button scrolly" onclick="addFeedback()">Save</button></div>
+            <div><button class="button" onclick="addFeedback()">Save</button></div>
           </div>
 
           <!-- Table for displaying trainees' information -->
@@ -197,7 +197,7 @@
 
         <div id="note-entry">
           <input type="text" id="taskInput" placeholder="Add a new Note...">
-          <button class="button scrolly" onclick="addTask()"> _____ADD_____ </button>
+          <button class="button" onclick="addTask()"> _____ADD_____ </button>
         </div>
         <div class="note-filter">
           <label>Show:&emsp;</label>
@@ -245,11 +245,11 @@
 
 
 
-            <button type="button" class="button scrolly" style="display: table-column;" onclick="enableEditing()"
+            <button type="button" class="button" style="display: table-column;" onclick="enableEditing()"
               id="editButton">
               Edit Information
             </button>
-            <button type="button" class="button scrolly" onclick="saveChanges()" id="saveButton">
+            <button type="button" class="button" onclick="saveChanges()" id="saveButton">
               Save Changes
             </button>
           </form>
@@ -466,13 +466,13 @@
       nameCell.innerHTML = allData.studentName;
       solvedTasksCell.innerHTML = allData.solvedTasks || 0;
       counterS_task.innerHTML =
-        '<button class="button scrolly" onclick="counterS_task(this)"> (+)</button>';
+        '<button class="button" onclick="counterS_task(this)"> (+)</button>';
       totalTaskCell.innerHTML = allData.studentTasks[allData.studentID];
       numberOfAbsenceCell.innerHTML = allData.absence || allData.absent;
       counterAbsent.innerHTML =
-        '<button class="button scrolly" onclick="counterAbsent(this)"> (+)</button>';
+        '<button class="button" onclick="counterAbsent(this)"> (+)</button>';
       removeCell.innerHTML =
-        '<button class="button scrolly" onclick="removeRow(this)" id="btnR">Remove</button>';
+        '<button class="button" onclick="removeRow(this)" id="btnR">Remove</button>';
       populateStudentDropdown();
     }
 
@@ -499,13 +499,13 @@
       nameCell.innerHTML = allData.studentName;
       solvedTasksCell.innerHTML = allData.solvedTasks || 0;
       counterS_task.innerHTML =
-        '<button class="button scrolly" onclick="counterS_task(this)" >(+)</button>';
+        '<button class="button" onclick="counterS_task(this)" >(+)</button>';
       totalTaskCell.innerHTML = allData.studentTasks[allData.studentID];
       numberOfAbsenceCell.innerHTML = allData.absence || allData.absent;
       counterAbsent.innerHTML =
-        '<button class="button scrolly" onclick="counterAbsent(this)" >(+)</button>';
+        '<button class="button" onclick="counterAbsent(this)" >(+)</button>';
       removeCell.innerHTML =
-        '<button class="button scrolly" onclick="removeRow(this)" id="btnR">Remove</button>';
+        '<button class="button" onclick="removeRow(this)" id="btnR">Remove</button>';
       populateStudentDropdown();
     }
 

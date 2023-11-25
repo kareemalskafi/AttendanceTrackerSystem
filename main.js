@@ -181,13 +181,13 @@ function addRowToTable(allData) {
   nameCell.innerHTML = allData.studentName;
   solvedTasksCell.innerHTML = allData.solvedTasks || 0;
   counterS_task.innerHTML =
-    '<button class="button scrolly" onclick="counterS_task(this)"> (+)</button>';
+    '<button class="button" onclick="counterS_task(this)"> (+)</button>';
   totalTaskCell.innerHTML = allData.studentTasks[allData.studentID];
   numberOfAbsenceCell.innerHTML = allData.absence || allData.absent;
   counterAbsent.innerHTML =
-    '<button class="button scrolly" onclick="counterAbsent(this)"> (+)</button>';
+    '<button class="button" onclick="counterAbsent(this)"> (+)</button>';
   removeCell.innerHTML =
-    '<button class="button scrolly" onclick="removeRow(this)" id="btnR">Remove</button>';
+    '<button class="button" onclick="removeRow(this)" id="btnR">Remove</button>';
   populateStudentDropdown();
 }
 
@@ -214,13 +214,13 @@ function addRowToTable(allData) {
   nameCell.innerHTML = allData.studentName;
   solvedTasksCell.innerHTML = allData.solvedTasks || 0;
   counterS_task.innerHTML =
-    '<button class="button scrolly" onclick="counterS_task(this)" >(+)</button>';
+    '<button class="button" onclick="counterS_task(this)" >(+)</button>';
   totalTaskCell.innerHTML = allData.studentTasks[allData.studentID];
   numberOfAbsenceCell.innerHTML = allData.absence || allData.absent;
   counterAbsent.innerHTML =
-    '<button class="button scrolly" onclick="counterAbsent(this)" >(+)</button>';
+    '<button class="button" onclick="counterAbsent(this)" >(+)</button>';
   removeCell.innerHTML =
-    '<button class="button scrolly" onclick="removeRow(this)" id="btnR">Remove</button>';
+    '<button class="button" onclick="removeRow(this)" id="btnR">Remove</button>';
   populateStudentDropdown();
 }
 
