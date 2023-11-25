@@ -1,6 +1,6 @@
 <h2 align="center">
   Attendance Tracker System - v1.0<br/>
-  <a href="https://github.com/kareemalskafi/AttendanceTrackerSystem" target="_blank">GitHub</a>
+  <a href="https://attendance-tracker-system-kareemalskafi.vercel.app/reigster.html" target="_blank">Demo</a>
 </h2>
 <div align="center">
   <img alt="Demo" src="https://blog.cdn.cmarix.com/blog/wp-content/uploads/2022/05/Attendance-Management-System.png" />
@@ -37,10 +37,10 @@ The team comprises five highly skilled professionals:
 
 
   - <a href="https://github.com/kareemalskafi" target="_blank" >Kareem Al_Skafi</a>
-  - <a href="https://github.com/JaneSmith" target="_blank" >Ayman </a>
-  - <a href="https://github.com/MarkJohnson" target="_blank" >Yousef</a>
-  - <a href="https://github.com/SaraWilliams" target="_blank" >Haitham</a>
-  - <a href="https://github.com/AlexBrown" target="_blank" >Abdallah</a><br/>
+  - <a href="https://github.com/AymanAlmahsery" target="_blank" >Ayman Ali</a>
+  - <a href="https://github.com/yousefweb" target="_blank" >Yousef Al_Deeb</a>
+  - <a href="https://github.com/hrawi20" target="_blank" >Haitham Hrawi</a>
+  - <a href="https://github.com/abdaullah964" target="_blank" >Abdallah Abu_Arab</a><br/>
 
 
 This project was built using these technologies.
