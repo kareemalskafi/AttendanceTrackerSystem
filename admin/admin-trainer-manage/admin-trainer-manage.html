@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trainer Information</title>
+    <link rel="stylesheet" href="admin-trainer-manage.css" />
+    <link rel="stylesheet" href="../admin-style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="menu-toggle" onclick="toggleNavbar()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div class="navbar">
+      <a href="admin-trainer-manage.html" class="active">Manage Trainers</a>
+      <a href="../admin-access/admin-access.html">Manage Students</a>
+    </div>
+
+    <div class="button-container">
+      <button class="add-button" onclick="openModal()">
+        <i class="fa-solid fa-user-plus"> add a new trainer</i>
+      </button>
+    </div>
+
+    <div class="table-container">
+      <table id="table">
+        <tr>
+          <th>Trainer Name</th>
+          <th>Trainer Email</th>
+        </tr>
+      </table>
+    </div>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Add Trainer</h2>
+        <form id="addTrainerForm">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" required />
+
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+
+          <button type="button" onclick="addTrainer()">Add</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="admin-trainer-manage.js"></script>
+    <script src="../navbar.js"></script>
+  </body>
+</html>

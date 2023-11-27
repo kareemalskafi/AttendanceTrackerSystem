@@ -1,0 +1,165 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f8f8; /* Soft gray background color */
+  color: #004447;
+}
+
+.table-container {
+  margin-top: 500px;
+  overflow-x: auto;
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* White background color for the table */
+}
+
+th,
+td {
+  border: 1px solid #004447;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #004447;
+  color: #ffffff;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+/* Add this style for the vertical navbar */
+.navbar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  background-color: #004447;
+  padding-top: 20px;
+}
+
+.navbar a {
+  padding: 15px 20px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #ffffff;
+  display: block;
+}
+
+.navbar a:hover {
+  background-color: #2c7873;
+}
+
+.navbar a.active {
+  background-color: #31a2a2;
+}
+/* ... (your existing CSS) ... */
+
+.navbar {
+  /* ... (your existing styles) ... */
+  display: none; /* Hide the navbar initially */
+}
+
+.navbar.show-navbar {
+  display: block; /* Show the navbar when the show-navbar class is applied */
+}
+/* ... (your existing CSS) ... */
+
+.menu-toggle {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 30px;
+  width: 30px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+}
+
+.bar {
+  width: 30px;
+  height: 4px;
+  background-color: #004447;
+  transition: 0.3s;
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.navbar {
+  /* ... (your existing styles) ... */
+  display: none; /* Hide the navbar initially */
+  transition: transform 0.3s ease-out;
+}
+
+.navbar.show-navbar {
+  display: block; /* Show the navbar when the show-navbar class is applied */
+}
+
+.navbar.active {
+  transform: translateX(0);
+}
+/* ... (your existing CSS) ... */
+
+.menu-toggle {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 30px;
+  width: 30px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+}
+
+.bar {
+  width: 30px;
+  height: 4px;
+  background-color: #000000;
+  transition: 0.3s;
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+  transform: rotate(-45deg) translateY(6px);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+  transform: rotate(45deg) translateY(-6px);
+}
+
+.navbar {
+  /* ... (your existing styles) ... */
+  display: none; /* Hide the navbar initially */
+  transition: transform 0.3s ease-out;
+  padding-top: 60px; /* Adjusted to prevent overlap with the text */
+}
+
+.navbar.show-navbar {
+  display: block; /* Show the navbar when the show-navbar class is applied */
+}
+
+.navbar.active {
+  transform: translateX(0);
+}

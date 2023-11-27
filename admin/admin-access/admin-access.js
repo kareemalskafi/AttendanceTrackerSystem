@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function ShowStudentData() {
   // get student table
-  let nextRow = document.getElementById("student-table");
+  let nextRow = document.getElementById("table");
 
   // Load student data from local storage
   studentData = LoadStudentData();
