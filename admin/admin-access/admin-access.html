@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Information</title>
+    <link rel="stylesheet" href="admin-access.css" />
+    <link rel="stylesheet" href="../admin-style.css" />
+  </head>
+  <body>
+    <div class="menu-toggle" onclick="toggleNavbar()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div class="navbar">
+      <a href="../admin-trainer-manage/admin-trainer-manage.html"
+        >Manage Trainers</a
+      >
+      <a href="admin-access.html" class="active">Manage Students</a>
+    </div>
+
+    <div class="button-container">
+      <button class="add-button" onclick="openModal()"></button>
+    </div>
+
+    <div class="table-container">
+      <table id="student-table">
+        <tr>
+          <th>Student ID</th>
+          <th>Student Name</th>
+          <th>Tasks Solved</th>
+          <th>Total Tasks</th>
+          <th>Absences</th>
+        </tr>
+      </table>
+    </div>
+
+    <script src="admin-access.js"></script>
+    <script src="../navbar.js"></script>
+  </body>
+</html>

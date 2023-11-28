@@ -429,10 +429,7 @@
 					background: #eee;
 				}
 				
-				table.default tbody
-				{
-				}
-
+			
 /*********************************************************************************/
 /* Buttons                                                                       */
 /*********************************************************************************/
@@ -523,7 +520,6 @@
 			-moz-font-smoothing: antialiased;
 			-ms-font-smoothing: antialiased;
 			-o-font-smoothing: antialiased;
-			font-smoothing: antialiased;
 		}
 
 		.icon-glass:before{content:"\f000";}
@@ -1224,6 +1220,9 @@
 /*                 Trainees Form                                             */
 /*********************************************************************************/
 
+.trainees {
+  overflow-x: auto; 
+}
 .trainees body {
   font-family: Arial, sans-serif;
   margin: 20px;

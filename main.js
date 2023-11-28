@@ -2,23 +2,34 @@
 //--------------------------------------------   Login   --------------------------------------------------------//
 //---------------------------------------------------------------------------------------------------------------//
 
-const loginUser = () => {
-  var loginEmail = document.getElementById("loginEmail").value;
-  var loginPassword = document.getElementById("loginPassword").value;
-  var existingUsers = JSON.parse(localStorage.getItem("userArray")) || [];
-  var userLoggingIn = existingUsers.find((user) => {
-    return user.email === loginEmail && user.password === loginPassword;
-  });
+const AdminEmail = "admin@yahoo.com";
+    const AdminPassword = "admin123";
+    if (!localStorage.getItem("userArray")) {
+      const defaultAdmin = {
+        emailAdmin: AdminEmail,
+        passAdmin: AdminPassword,
+        isAdmin: false,
+      };
+      localStorage.setItem("userArray", JSON.stringify([defaultAdmin]));
+    }
+    const loginUser = () => {
+      var loginEmail = document.getElementById("loginEmail").value;
+      var loginPassword = document.getElementById("loginPassword").value;
+      var existingUsers = JSON.parse(localStorage.getItem("userArray")) || [];
 
-  if (userLoggingIn) {
-    userLoggingIn.loginactive = true;
-    localStorage.setItem("userArray", JSON.stringify(existingUsers));
-    alert("Login successful!");
-    window.location.href = "index.html";
-  } else {
-    alert("Invalid email or password. Please try again.");
-  }
-};
+      var adminLoggingIn = existingUsers.find((user) => {
+        return user.emailAdmin === loginEmail && user.passAdmin === loginPassword;
+      });
+
+      if (adminLoggingIn) {
+        alert("Admin login successful!");
+        adminLoggingIn.isAdmin = true;
+        localStorage.setItem("userArray", JSON.stringify(existingUsers));
+        window.location.href = "/AttendanceTrackerSystem/admin/admin-access/admin-access.html";
+      } else {
+        alert("Invalid admin email or password. Please try again.");
+      }
+    };
 
 //---------------------------------------------------------------------------------------------------------------//
 //--------------------------------------------   Register  ------------------------------------------------------//
@@ -30,6 +41,7 @@ const registerUser = () => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
   const loginactive = false;
+  const isAdmin = false;
 
   // Basic form validation
   if (firstName === "" || lastName === "" || email === "" || password === "") {
@@ -50,6 +62,7 @@ const registerUser = () => {
     email: email,
     password: password,
     loginactive: loginactive,
+    isAdmin: isAdmin
   };
 
   const existingUsers = JSON.parse(localStorage.getItem("userArray")) || [];
